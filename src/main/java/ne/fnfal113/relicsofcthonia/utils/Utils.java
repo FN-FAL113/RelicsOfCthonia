@@ -20,7 +20,7 @@ public class Utils {
     }
 
     public static void sendRelicMessage(String message, LivingEntity livingEntity){
-        livingEntity.sendMessage(colorTranslator("&6[RelicsOfCthonia] > " + message));
+        livingEntity.sendMessage(colorTranslator(RelicsOfCthonia.getInstance().getLocale().string("prefix") + message));
     }
 
     // set or update the given string to replace with the given config section

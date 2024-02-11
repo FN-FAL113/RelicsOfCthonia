@@ -47,9 +47,9 @@ public class MysteriousHolocron extends AbstractRelic {
 
         consumeRelic(itemInOffhand);
         if(!entityList.isEmpty()) {
-            Utils.sendRelicMessage("&eWoah what happened to those entities! are they gone forever?!", player);
+            Utils.sendRelicMessage("mysterious-holocron-gone", player);
         } else {
-            Utils.sendRelicMessage("&eMysterious holocron got destroyed?! I wonder if there are any nearby entities, what would happen eh", player);
+            Utils.sendRelicMessage("mysterious-holocron-destroyed", player);
         }
     }
 

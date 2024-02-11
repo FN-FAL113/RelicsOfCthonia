@@ -23,6 +23,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.Map;
+
 public class AbstractRelicVoider extends UnplaceableBlock {
 
     private static final CustomItemStack DECREMENT_CONDITION = new CustomItemStack(Material.RED_STAINED_GLASS_PANE,
@@ -112,7 +114,8 @@ public class AbstractRelicVoider extends UnplaceableBlock {
 
         if(pickedUpRelicCondition <= conditionQuota){
             if(isNotifEnabled()) {
-                Utils.sendRelicMessage("&6Successfully voided " + "&r" + pickedUpRelic.getItemStack().getItemMeta().getDisplayName(), event.getEntity());
+                Utils.sendRelicMessage("successfully-voided" , event.getEntity(),
+                        Map.of("%item%", pickedUpRelic.getItemStack().getItemMeta().getDisplayName()));
             }
 
             pickedUpRelic.remove();

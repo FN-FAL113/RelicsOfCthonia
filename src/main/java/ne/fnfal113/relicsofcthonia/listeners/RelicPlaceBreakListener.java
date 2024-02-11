@@ -80,7 +80,7 @@ public class RelicPlaceBreakListener implements Listener {
 
         relic.ifPresent(item -> {
             if(item instanceof AbstractRelic){
-                Utils.sendRelicMessage("You placed a relic, it will not drop anything once broken!", event.getPlayer());
+                Utils.sendRelicMessage("placed-relic", event.getPlayer());
             }
         });
 

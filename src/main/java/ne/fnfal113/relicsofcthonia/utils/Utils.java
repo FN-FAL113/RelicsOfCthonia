@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class Utils {
@@ -19,9 +20,22 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', strings);
     }
 
-    public static void sendRelicMessage(String message, LivingEntity livingEntity){
-        livingEntity.sendMessage(colorTranslator(RelicsOfCthonia.getInstance().getLocale().string("prefix") + message));
+    public static void sendRelicMessage(String messageKey, LivingEntity livingEntity){
+        String prefix = RelicsOfCthonia.getInstance().getLocale().string("prefix");
+        String m = RelicsOfCthonia.getInstance().getLocale().string("messages."+messageKey);
+        livingEntity.sendMessage(colorTranslator( prefix+m));
     }
+
+    public static void sendRelicMessage(String messageKey, LivingEntity livingEntity, Map<String, String> replace){
+        String prefix = RelicsOfCthonia.getInstance().getLocale().string("prefix");
+        String m = RelicsOfCthonia.getInstance().getLocale().string("messages."+messageKey);
+        for(Map.Entry<String, String> entry : replace.entrySet()){
+            m = m.replace(entry.getKey(), entry.getValue());
+        }
+        livingEntity.sendMessage(colorTranslator( prefix+m));
+    }
+
+
 
     // set or update the given string to replace with the given config section
     // and settings that returns an integer value as the new string.

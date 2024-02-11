@@ -28,6 +28,6 @@ public class CrossedSwords extends AbstractRelic {
 
     @Override
     public void onItemRightClick(PlayerInteractEvent event, Player player, ItemStack itemInOffhand) {
-        Utils.sendRelicMessage("&eThese swords are too old and fragile to be used in combat, I'll trade it instead.", player);
+        Utils.sendRelicMessage("crossed-swords", player);
     }
 }

@@ -64,7 +64,7 @@ public class PiglinMainListener implements Listener {
         }
 
         if(piglin.hasMetadata("relic_trader")){
-            Utils.sendRelicMessage("&ePiglin is currently in trade!", player);
+            Utils.sendRelicMessage("piglin-in-trade", player);
             event.setCancelled(true);
             return;
         }

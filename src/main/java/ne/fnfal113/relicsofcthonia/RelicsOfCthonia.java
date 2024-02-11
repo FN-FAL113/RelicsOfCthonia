@@ -92,4 +92,8 @@ public final class RelicsOfCthonia extends JavaPlugin implements SlimefunAddon {
     public RelicsRegistry getRelicsRegistry(){
         return instance.relicsRegistry;
     }
+
+    public static Locale locale(){
+        return instance.locale;
+    }
 }

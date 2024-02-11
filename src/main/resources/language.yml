@@ -40,7 +40,73 @@ messages:
   skull-hat: "&eThis skull hat can be traded to piglins only, it has no uses!"
   tanzanite-block: "&eWhat a good looking block but it can only be traded to piglins."
 
-####
+
+relic-settings:
+  nether-quartz-ore: nether quartz ore
+  warped-nylium: warped nylium
+  netherrack: netherrack
+  strider: strider
+  hoglin: hoglin
+  piglin: piglin
+  gold-ingot: gold ingot
+  silver-ingot: silver ingot
+  copper-wire: copper wire
+  ancient-debris: ancient debris
+  podzol: podzol
+  wither-skeleton: wither skeleton
+  iron-ore: iron ore
+  mycelium: mycelium
+  skeleton: skeleton
+  magma-cube: magma cube
+  blackstone: blackstone
+  gravel: gravel
+  zombified-piglin: zombified piglin
+  blaze: blaze
+  clay: clay
+  soul-soil: soul soil
+  ghast: ghast
+  piglin-brute: piglin brute
+  copper-ingot: copper ingot
+  soul-sand: soul sand
+  nether-gold-ore: nether gold ore
+  zoglin: zoglin
+  bookshelf: bookshelf
+  warped-wart-block: warped wart block
+  bronze-ingot: bronze ingot
+  gold-ore: gold ore
+  magma-block: magma block
+  basic-circuit-board: basic circuit board
+  crimson-nylium: crimson nylium
+  repeater: repeater
+  aluminum-bronze-ingot: aluminum bronze ingot
+  electric-motor: electric motor
+  nether-wart-block: nether wart block
+  sword-of-beheading: sword of beheading
+  seismic-axe: seismic axe
+  energy-regulator: energy regulator
+  basalt: basalt
+  electric-dust-washer: electric dust washer
+  solar-generator-2: solar generator 2
+  carbon: carbon
+  synthetic-sapphire: synthetic sapphire
+  aluminum-brass-ingot: aluminum brass ingot
+  solar-generator-4: solar generator 4
+  large-capacitor: large capacitor
+  programmable-android-2: programmable android 2
+  gilded-iron-chestplate: gilded iron chestplate
+  explosive-bow: explosive bow
+  redstone-alloy: redstone alloy
+  gold-12k-leggings: gold 12k leggings
+  carbonado: carbonado
+  plastic-sheet: plastic sheet
+  icy-bow: icy bow
+  carbonado-edged-capacitor: carbonado edged capacitor
+
+###############
+# bruh moment #
+###############
+drops-on: "Drops on:"
+possible-piglin-reward: "Possible Piglin reward:"
 common-relic-cthonian-pearl:
   lore:
     - ''

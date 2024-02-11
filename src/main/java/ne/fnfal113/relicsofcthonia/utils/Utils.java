@@ -2,6 +2,7 @@ package ne.fnfal113.relicsofcthonia.utils;
 
 import ne.fnfal113.relicsofcthonia.RelicsOfCthonia;
 import ne.fnfal113.relicsofcthonia.config.ConfigManager;
+import ne.fnfal113.relicsofcthonia.config.Locale;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -10,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -84,6 +86,7 @@ public class Utils {
         ConfigManager configManager = RelicsOfCthonia.getInstance().getConfigManager();
         ItemMeta meta = itemStack.getItemMeta();
         List<String> lore = meta.getLore();
+        if(lore == null) return;
         int j = 0;
 
         for(int i = 0 ; i < lore.size(); i++){
@@ -95,9 +98,10 @@ public class Utils {
 
         for (int x = 0; x < configManager.getCustomConfig(configFileName).getStringList(section + "." + settings).size(); x++) {
             String value = configManager.getCustomConfig("relic-settings").getStringList(section + "." + settings).get(x);
+            String translatedString = RelicsOfCthonia.locale().string("relic-settings."+value.toLowerCase().replace("_", "-"));
 
             if(!value.isEmpty()) {
-                lore.add(j + 1, Utils.colorTranslator(color + prefix + value.replace("_", " ").toLowerCase()));
+                lore.add(j + 1, Utils.colorTranslator(color + prefix + translatedString));
             }
         }
 

@@ -1,12 +1,15 @@
 package ne.fnfal113.relicsofcthonia.listeners;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import lombok.Getter;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import ne.fnfal113.relicsofcthonia.RelicsOfCthonia;
 import ne.fnfal113.relicsofcthonia.relics.abstracts.AbstractRelic;
 import ne.fnfal113.relicsofcthonia.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -15,6 +18,10 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Optional;
 
 public class RelicPlaceBreakListener implements Listener {
+
+    @Getter
+    private final boolean disableRelicPlacement = RelicsOfCthonia.getInstance().getConfig().getBoolean("disable-relic-placement", false);
+
 
     // Due to synchronization bugs with block storage when spam clicking
     // it leads to bugs and unforeseen consequences. Picking up relics is
@@ -79,6 +86,10 @@ public class RelicPlaceBreakListener implements Listener {
         Optional<SlimefunItem> relic = Optional.ofNullable(SlimefunItem.getByItem(itemInHand));
 
         relic.ifPresent(item -> {
+            if(disableRelicPlacement){
+                event.setCancelled(true);
+                return;
+            }
             if(item instanceof AbstractRelic){
                 Utils.sendRelicMessage("placed-relic", event.getPlayer());
             }

@@ -25,6 +25,8 @@ public class MiningListener implements Listener {
 
     @Getter
     private final Map<AbstractRelic, List<Material>> whereToDropMaterialMap = RelicsOfCthonia.getInstance().getRelicsRegistry().getWhereToDropMaterialMap();
+    @Getter
+    private final double globalChanceMultiplier = RelicsOfCthonia.getInstance().getConfig().getDouble("global-chance-multiplier", 1.0);
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onBlockBreak(BlockBreakEvent event) {
@@ -68,7 +70,7 @@ public class MiningListener implements Listener {
                     double randomOrigin = currentRandomThread.nextDouble(0.0, 60);
                     double randomNum = currentRandomThread.nextDouble(randomOrigin, 100);
                     
-                    if(randomNum < abstractRelic.getDropChance()) {
+                    if(randomNum < abstractRelic.getDropChance()*globalChanceMultiplier) {
                         ItemStack drop = abstractRelic.setRelicConditionAndGet(true, 0);
                         
                         Utils.createSyncTask(syncTask -> block.getWorld().dropItemNaturally(block.getLocation(), drop));

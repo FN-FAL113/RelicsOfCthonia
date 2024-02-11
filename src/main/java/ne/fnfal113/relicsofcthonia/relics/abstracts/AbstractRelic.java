@@ -41,6 +41,10 @@ public abstract class AbstractRelic extends SlimefunItem implements OffHandRight
     private final ConfigManager configManager = RelicsOfCthonia.getInstance().getConfigManager();
     @Getter
     private final RelicsRegistry relicsRegistry = RelicsOfCthonia.getInstance().getRelicsRegistry();
+    @Getter
+    private final boolean appendSources = RelicsOfCthonia.getInstance().getConfig().getBoolean("append-source-to-lore", true);
+    @Getter
+    private final boolean appendTrades = RelicsOfCthonia.getInstance().getConfig().getBoolean("append-trades-to-lore", true);
 
     @ParametersAreNonnullByDefault
     public AbstractRelic(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe,
@@ -58,11 +62,14 @@ public abstract class AbstractRelic extends SlimefunItem implements OffHandRight
        // update this itemstack object lore for the drop chance
        Utils.setLoreByConfigValue(this.getItem(), this.getId(), "drop-chance", "%", "&e", "%", "relic-settings");
        // update this itemstack object lore on which materials do relic drop
-       Utils.setLoreByConfigStringList(this.getItem(), this.getId(), "drops-on-material", "Drops on:", "&e", "‣ ", "", "relic-settings");
+        if(appendSources)
+            Utils.setLoreByConfigStringList(this.getItem(), this.getId(), "drops-on-material", RelicsOfCthonia.locale().string("drops-on"), "&e", "‣ ", "", "relic-settings");
        // update this itemstack object lore on which mobs do relic drop
-       Utils.setLoreByConfigStringList(this.getItem(), this.getId(), "drops-on-mob", "Drops on:", "&e", "‣ ", "", "relic-settings");
+        if(appendSources)
+            Utils.setLoreByConfigStringList(this.getItem(), this.getId(), "drops-on-mob", RelicsOfCthonia.locale().string("drops-on"), "&e", "‣ ", "", "relic-settings");
        // update this itemstack object lore for the barter rewards
-       Utils.setLoreByConfigStringList(this.getItem(), this.getId(), "piglin-barter-rewards", "Possible Piglin reward:", "&a", "‣ " + getPiglinRewardAmount() + " ", "", "relic-settings");
+        if(appendTrades)
+            Utils.setLoreByConfigStringList(this.getItem(), this.getId(), "piglin-barter-rewards", RelicsOfCthonia.locale().string("possible-piglin-reward"), "&a", "‣ " + getPiglinRewardAmount() + " ", "", "relic-settings");
     }
 
     public void initializeSettings(double dropChance, int piglinRewardAmount, int defaultDropSize){

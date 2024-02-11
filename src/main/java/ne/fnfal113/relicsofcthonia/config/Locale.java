@@ -10,8 +10,8 @@ import java.util.List;
 
 public class Locale {
 
-    public static YamlConfiguration configuration;
-    public static File file;
+    YamlConfiguration configuration;
+    File file;
 
     public Locale(){
         try {

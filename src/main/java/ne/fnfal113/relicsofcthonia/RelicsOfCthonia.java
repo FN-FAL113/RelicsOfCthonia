@@ -1,5 +1,6 @@
 package ne.fnfal113.relicsofcthonia;
 
+import io.github.bakedlibs.dough.updater.BlobBuildUpdater;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import ne.fnfal113.relicsofcthonia.config.ConfigManager;
 import ne.fnfal113.relicsofcthonia.config.Locale;
@@ -48,6 +49,9 @@ public final class RelicsOfCthonia extends JavaPlugin implements SlimefunAddon {
 
         registerEvents();
 
+        if (getConfig().getBoolean("auto-update", true) && getDescription().getVersion().startsWith("Dev - ")) {
+            new BlobBuildUpdater(this, getFile(), "RelicsOfCthonia").start();
+        }
     }
 
     public void registerEvents(){
@@ -87,13 +91,10 @@ public final class RelicsOfCthonia extends JavaPlugin implements SlimefunAddon {
 
     public ConfigManager getConfigManager(){return instance.configManager;}
 
-    public Locale getLocale(){ return instance.locale; }
+    public static Locale locale(){ return instance.locale; }
 
     public RelicsRegistry getRelicsRegistry(){
         return instance.relicsRegistry;
     }
 
-    public static Locale locale(){
-        return instance.locale;
-    }
 }

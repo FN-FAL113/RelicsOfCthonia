@@ -28,13 +28,13 @@ import java.util.Map;
 public class AbstractRelicVoider extends UnplaceableBlock {
 
     private static final CustomItemStack DECREMENT_CONDITION = new CustomItemStack(Material.RED_STAINED_GLASS_PANE,
-            "&cDecrement Condition Quota",
-            "&7Click to decrement the quota by 1"
+            RelicsOfCthonia.locale().string("voider.inc-condition-name"),
+            RelicsOfCthonia.locale().stringArray("voider.inc-condition-lore")
     );
 
     private static final CustomItemStack INCREMENT_CONDITION = new CustomItemStack(Material.GREEN_STAINED_GLASS_PANE,
-            "&cIncrement Condition Quota",
-            "&7Click to increment the quota by 1"
+            RelicsOfCthonia.locale().string("voider.dec-condition-name"),
+            RelicsOfCthonia.locale().stringArray("voider.dec-condition-lore")
     );
 
     @Getter
@@ -63,41 +63,48 @@ public class AbstractRelicVoider extends UnplaceableBlock {
         }
     }
 
-    public void setConditionQuota(ItemStack itemStack, Inventory inventory, int integer){
+    public void setConditionQuota(ItemStack itemStack, Inventory inventory, int integer) {
         ItemMeta meta = itemStack.getItemMeta();
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
         int conditionQuota = pdc.getOrDefault(getConditionKey(), PersistentDataType.INTEGER, 0);
         int finalCondition = conditionQuota + integer;
 
-        if(finalCondition < 0 || finalCondition > 100){
+        if (finalCondition < 0 || finalCondition > 100) {
             return;
         }
 
         pdc.set(getConditionKey(), PersistentDataType.INTEGER, finalCondition);
         itemStack.setItemMeta(meta);
 
+        String[] lore = RelicsOfCthonia.locale().stringList("voider.condition-quota-lore").stream()
+                .map(s -> s.replace("%final_condition%", finalCondition + ""))
+                .toArray(String[]::new);
+
         inventory.setItem(4, new CustomItemStack(Material.PURPLE_STAINED_GLASS,
-                "&fVoids any " + getRarity().name() + " relic whose",
-                "&fcondition is below " + "&6&l" + finalCondition + "%"
+                RelicsOfCthonia.locale().string("voider.condition-quota-name")
+                        .replace("%rarity%", getRarity().name()), lore
         ));
     }
 
-    public void onClick(ItemStack itemStack, Player player){
+    public void onClick(ItemStack itemStack, Player player) {
         ItemMeta meta = itemStack.getItemMeta();
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
         int conditionQuota = pdc.getOrDefault(getConditionKey(), PersistentDataType.INTEGER, 0);
 
         Inventory inventory = Bukkit.createInventory(null, 9, Utils.colorTranslator(meta.getDisplayName()));
 
-        for(int i = 0; i < inventory.getSize(); i++){
-            if(i == 0){
+        for (int i = 0; i < inventory.getSize(); i++) {
+            if (i == 0) {
                 inventory.setItem(i, DECREMENT_CONDITION);
-            } else if(i == 8){
+            } else if (i == 8) {
                 inventory.setItem(i, INCREMENT_CONDITION);
-            } else if(i == 4) {
+            } else if (i == 4) {
+                String[] lore = RelicsOfCthonia.locale().stringList("voider.condition-quota-lore").stream()
+                        .map(s -> s.replace("%final_condition%", conditionQuota + ""))
+                        .toArray(String[]::new);
                 inventory.setItem(i, new CustomItemStack(Material.PURPLE_STAINED_GLASS,
-                        "&fVoids any " + getRarity().name() + " relic whose",
-                        "&fcondition is below " + "&6&l" + conditionQuota + "%"
+                        RelicsOfCthonia.locale().string("voider.condition-quota-name")
+                                .replace("%rarity%", getRarity().name()), lore
                 ));
             } else {
                 inventory.setItem(i, ChestMenuUtils.getBackground());
@@ -107,14 +114,14 @@ public class AbstractRelicVoider extends UnplaceableBlock {
         player.openInventory(inventory);
     }
 
-    public void onRelicPickup(EntityPickupItemEvent event, ItemStack voider, Item pickedUpRelic, int pickedUpRelicCondition){
+    public void onRelicPickup(EntityPickupItemEvent event, ItemStack voider, Item pickedUpRelic, int pickedUpRelicCondition) {
         ItemMeta meta = voider.getItemMeta();
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
         int conditionQuota = pdc.getOrDefault(getConditionKey(), PersistentDataType.INTEGER, 0);
 
-        if(pickedUpRelicCondition <= conditionQuota){
-            if(isNotifEnabled()) {
-                Utils.sendRelicMessage("successfully-voided" , event.getEntity(),
+        if (pickedUpRelicCondition <= conditionQuota) {
+            if (isNotifEnabled()) {
+                Utils.sendRelicMessage("successfully-voided", event.getEntity(),
                         Map.of("%item%", pickedUpRelic.getItemStack().getItemMeta().getDisplayName()));
             }
 

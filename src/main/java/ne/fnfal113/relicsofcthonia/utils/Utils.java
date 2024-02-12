@@ -2,7 +2,6 @@ package ne.fnfal113.relicsofcthonia.utils;
 
 import ne.fnfal113.relicsofcthonia.RelicsOfCthonia;
 import ne.fnfal113.relicsofcthonia.config.ConfigManager;
-import ne.fnfal113.relicsofcthonia.config.Locale;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -11,7 +10,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -23,14 +21,14 @@ public class Utils {
     }
 
     public static void sendRelicMessage(String messageKey, LivingEntity livingEntity){
-        String prefix = RelicsOfCthonia.getInstance().getLocale().string("prefix");
-        String m = RelicsOfCthonia.getInstance().getLocale().string("messages."+messageKey);
+        String prefix = RelicsOfCthonia.locale().string("prefix");
+        String m = RelicsOfCthonia.locale().string("messages."+messageKey);
         livingEntity.sendMessage(colorTranslator( prefix+m));
     }
 
     public static void sendRelicMessage(String messageKey, LivingEntity livingEntity, Map<String, String> replace){
-        String prefix = RelicsOfCthonia.getInstance().getLocale().string("prefix");
-        String m = RelicsOfCthonia.getInstance().getLocale().string("messages."+messageKey);
+        String prefix = RelicsOfCthonia.locale().string("prefix");
+        String m = RelicsOfCthonia.locale().string("messages."+messageKey);
         for(Map.Entry<String, String> entry : replace.entrySet()){
             m = m.replace(entry.getKey(), entry.getValue());
         }

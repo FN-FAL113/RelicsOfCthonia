@@ -4,6 +4,7 @@ import ne.fnfal113.relicsofcthonia.RelicsOfCthonia;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import javax.annotation.Nonnull;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class Locale {
         }
     }
 
+    @Nonnull
     public String string(String key){
         if(configuration == null) return key;
         if(!configuration.contains(key)){
@@ -35,6 +37,7 @@ public class Locale {
         return configuration.getString(key);
     }
 
+    @Nonnull
     public List<String> stringList(String key){
         List<String> result = new ArrayList<>();
         if(configuration == null){
@@ -56,6 +59,7 @@ public class Locale {
         return configuration.getStringList(key);
     }
 
+    @Nonnull
     public String[] stringArray(String key){
         List<String> list = stringList(key);
         String[] strings = new String[list.size()];

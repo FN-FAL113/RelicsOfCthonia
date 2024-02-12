@@ -1,6 +1,26 @@
 prefix: "&6[RelicsOfCthonia] > "
+slimefun-menu:
+  main: "&6Relics of Cthonia"
+  common: "&aCommon Relic"
+  uncommon: "&7Uncommon Relic"
+  rare: "&9Rare Relic"
+  epic: "&dEpic Relic"
+  legendary: "&6Legendary Relic"
+  misc: "&6Miscellaneous Items"
+voider:
+  inc-condition-name: "&cIncrement Condition Quota"
+  inc-condition-lore: "&7Click to increment the quota by 1"
+  dec-condition-name: "&cDecrement Condition Quota"
+  dec-condition-lore: "&7Click to decrement the quota by 1"
+  condition-quota-name: "&fVoids any %rarity% relic whose"
+  condition-quota-lore: "&fcondition is below &6&l%final_condition%%"
 messages:
   piglin-in-trade: "&ePiglin is currently in trade!"
+  failed-trade: "&cFailed trade! piglin is not allowed to trade in the current location!"
+  failed-trade-not-relic: "&cFailed trade! the barter item you gave is not a cthonian relic."
+  failed-trade-condition: "&cUnsuccessful trade! piglin trader is not satisfied with the relic condition and got destroyed upon examining!"
+  successful-trade: "&aSuccessful trade! Piglin trader is happy to trade with you anytime!"
+  successful-trade-sf-command: "&aRelic obtained from sf give command, successful trade!"
   placed-relic: "You placed a relic, it will not drop anything once broken!"
   successfully-voided: "&6Successfully voided &r%item%"
   used-pearl: "&eYou have been teleported to your target location using Cthonian Pearl"
@@ -102,11 +122,14 @@ relic-settings:
   icy-bow: icy bow
   carbonado-edged-capacitor: carbonado edged capacitor
 
-###############
-# bruh moment #
-###############
+###########################################################
+# These words MUST match words in item lore.              #
+# Plugin will use them to inject "Conditions" and "Drops" #
+###########################################################
 drops-on: "Drops on:"
 possible-piglin-reward: "Possible Piglin reward:"
+
+
 common-relic-cthonian-pearl:
   lore:
     - ''

@@ -28,7 +28,7 @@ public class SkullHat extends AbstractRelic {
 
     @Override
     public void onItemRightClick(PlayerInteractEvent event, Player player, ItemStack itemInOffhand) {
-        Utils.sendRelicMessage("&eThis skull hat can be traded to piglins only, it has no uses!", player);
+        Utils.sendRelicMessage("skull-hat", player);
     }
 
 }

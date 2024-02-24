@@ -33,7 +33,7 @@ public class ValiantTalisman extends AbstractRelic {
             consumeRelic(itemInOffhand);
             player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 420, 1));
 
-            Utils.sendRelicMessage("&eValiant Talisman got destroyed upon usage and has granted you with health boost!", player);
+            Utils.sendRelicMessage("valiant-talisman", player);
         }
     }
 

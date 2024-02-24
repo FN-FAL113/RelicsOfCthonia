@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class EyeOfSauron extends AbstractRelic {
 
@@ -39,12 +40,17 @@ public class EyeOfSauron extends AbstractRelic {
                 int z = (int) player.getLocation().getZ();
 
                 playerList.add((Player) en);
-                Utils.sendRelicMessage("&eEye of Sauron found a nearby player named " + player.getName() + " at x: " + x + " y: " + y + " z: " + z, player);
+                Utils.sendRelicMessage("eye-of-sauron-found", player, Map.of(
+                        "%player%", ((Player) en).getDisplayName(),
+                        "%x%", x+"",
+                        "%y%", y+"",
+                        "%z%", z+""
+                ));
             }
         }
 
         if(playerList.isEmpty()){
-            Utils.sendRelicMessage("&eEye of Sauron did not find any nearby players!", player);
+            Utils.sendRelicMessage("eye-of-sauron-didnt-find", player);
         }
 
         consumeRelic(itemInOffhand);

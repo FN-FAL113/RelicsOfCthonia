@@ -33,7 +33,7 @@ public class AgedWine extends AbstractRelic {
             consumeRelic(itemInOffhand);
             player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 100, 1));
 
-            Utils.sendRelicMessage("&eAged wine consumed! you feeling the booz there ah.", player);
+            Utils.sendRelicMessage("aged-wine", player);
         }
     }
 

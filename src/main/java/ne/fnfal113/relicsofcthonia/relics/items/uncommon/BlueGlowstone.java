@@ -27,7 +27,7 @@ public class BlueGlowstone extends AbstractRelic {
 
     @Override
     public void onItemRightClick(PlayerInteractEvent event, Player player, ItemStack itemInOffhand) {
-        Utils.sendRelicMessage("&eBlue glowstone has no uses, its old and broken but you can trade it to piglins.", player);
+        Utils.sendRelicMessage("blue-glowstone", player);
     }
 
 }

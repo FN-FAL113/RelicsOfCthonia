@@ -39,12 +39,12 @@ public class PiglinMainListener implements Listener {
     private final Map<UUID, UUID> currentTradeMap = new HashMap<>();
 
     @EventHandler
-    public void onPiglinRightClick(PlayerInteractEntityEvent event){
-        if(event.isCancelled()){
+    public void onPiglinRightClick(PlayerInteractEntityEvent event) {
+        if (event.isCancelled()) {
             return;
         }
 
-        if(!(event.getRightClicked() instanceof Piglin)){
+        if (!(event.getRightClicked() instanceof Piglin)) {
             return;
         }
 
@@ -55,7 +55,7 @@ public class PiglinMainListener implements Listener {
             return;
         }
 
-        if(!piglin.isAdult()){
+        if (!piglin.isAdult()) {
             return;
         }
 
@@ -63,8 +63,8 @@ public class PiglinMainListener implements Listener {
             return;
         }
 
-        if(piglin.hasMetadata("relic_trader")){
-            Utils.sendRelicMessage("&ePiglin is currently in trade!", player);
+        if (piglin.hasMetadata("relic_trader")) {
+            Utils.sendRelicMessage("piglin-in-trade", player);
             event.setCancelled(true);
             return;
         }
@@ -72,11 +72,11 @@ public class PiglinMainListener implements Listener {
         ItemStack mainHandItem = player.getInventory().getItemInMainHand();
         Optional<SlimefunItem> sfItem = Optional.ofNullable(SlimefunItem.getByItem(mainHandItem));
 
-        if(!sfItem.isPresent()){
+        if (!sfItem.isPresent()) {
             return;
         }
 
-        if(sfItem.get() instanceof AbstractRelic){
+        if (sfItem.get() instanceof AbstractRelic) {
             // add barter material type
             piglin.addBarterMaterial(mainHandItem.getType());
 
@@ -86,7 +86,7 @@ public class PiglinMainListener implements Listener {
             // add piglin to map where player is the value for later retrieval
             getCurrentTradeMap().put(piglin.getUniqueId(), player.getUniqueId());
 
-            Utils.createDelayedTask(task ->{
+            Utils.createDelayedTask(task -> {
                 piglin.setAI(false);
                 piglin.setInvulnerable(true);
                 piglin.setGlowing(true);
@@ -126,12 +126,12 @@ public class PiglinMainListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onDrop(EntityDropItemEvent event){
-        if(!(event.getEntity() instanceof Piglin)){
+    public void onDrop(EntityDropItemEvent event) {
+        if (!(event.getEntity() instanceof Piglin)) {
             return;
         }
 
-        if(!event.getEntity().hasMetadata("relic_trader")){
+        if (!event.getEntity().hasMetadata("relic_trader")) {
             return;
         }
 
@@ -140,50 +140,50 @@ public class PiglinMainListener implements Listener {
 
         // we prevent slimefun from converting barter drops if the
         // piglin has the metadata during the barter
-        if(SlimefunItem.getByItem(itemStack) instanceof StrangeNetherGoo && !event.isCancelled()){
+        if (SlimefunItem.getByItem(itemStack) instanceof StrangeNetherGoo && !event.isCancelled()) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
-    public void onBarter(PiglinBarterEvent event){
-        if(!event.getEntity().hasMetadata("relic_trader")){
+    public void onBarter(PiglinBarterEvent event) {
+        if (!event.getEntity().hasMetadata("relic_trader")) {
             return;
         }
 
         Piglin piglin = event.getEntity();
 
-        if(event.isCancelled()){
+        if (event.isCancelled()) {
             // if canceled call necessary callbacks
             clearTradeData(event, piglin);
-            executeTradeMessage(event, "&cFailed trade! piglin is not allowed to trade in the current location!");
+            executeTradeMessage(event, "messages.failed-trade");
 
             return;
         }
 
         Optional<SlimefunItem> sfItem = Optional.ofNullable(SlimefunItem.getByItem(event.getInput()));
 
-        if(!sfItem.isPresent()){
+        if (!sfItem.isPresent()) {
             // if not present call necessary callbacks
             clearTradeData(event, piglin);
-            executeTradeMessage(event, "&cFailed trade! the barter item you gave is not a cthonian relic.");
+            executeTradeMessage(event, "failed-trade-not-relic");
 
             return;
         }
 
-        if(sfItem.get() instanceof AbstractRelic){
+        if (sfItem.get() instanceof AbstractRelic) {
             AbstractRelic relic = (AbstractRelic) sfItem.get();
             int relicCondition = relic.getRelicCondition(event.getInput());
             boolean haveCondition = relicCondition != 0;
 
-            if(haveCondition && ThreadLocalRandom.current().nextInt(0, 100) > relicCondition){
+            if (haveCondition && ThreadLocalRandom.current().nextInt(0, 100) > relicCondition) {
                 removeBarterMaterial(event);
-                executeTradeMessage(event, "&cUnsuccessful trade! piglin trader is not satisfied with the relic condition and got destroyed upon examining!");
+                executeTradeMessage(event, "failed-trade-condition");
 
                 return;
             }
 
-            if(RelicsOfCthonia.getInstance().getRelicsRegistry().getPiglinRewardList().containsKey(relic)){
+            if (RelicsOfCthonia.getInstance().getRelicsRegistry().getPiglinRewardList().containsKey(relic)) {
                 List<String> rewardList = RelicsOfCthonia.getInstance().getRelicsRegistry().getPiglinRewardList().get(relic);
 
                 int randomRewardIndex = ThreadLocalRandom.current().nextInt(0, rewardList.size());
@@ -205,12 +205,12 @@ public class PiglinMainListener implements Listener {
                     event.getOutcome().add(finalReward);
                 });
 
-                executeTradeMessage(event, "&aSuccessful trade! Piglin trader is happy to trade with you anytime!");
+                executeTradeMessage(event, "successful-trade");
                 piglin.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, piglin.getLocation().add(0, 2.2, 0), 0);
                 piglin.getWorld().playSound(piglin.getLocation(), Sound.ENTITY_PIGLIN_ADMIRING_ITEM, 1.0F, 1.0F);
 
-                if(!haveCondition){
-                    executeTradeMessage(event, "&aRelic obtained from sf give command, successful trade!");
+                if (!haveCondition) {
+                    executeTradeMessage(event, "successful-trade-sf-command");
                 }
 
             } else {
@@ -219,31 +219,32 @@ public class PiglinMainListener implements Listener {
         } // is sf item a relic
     }
 
-    public void clearTradeData(PiglinBarterEvent event, Piglin piglin){
+    public void clearTradeData(PiglinBarterEvent event, Piglin piglin) {
         removeBarterMaterial(event);
         removePiglinMetadata(piglin);
     }
 
-    public void removePiglinMetadata(Piglin piglin){
+    public void removePiglinMetadata(Piglin piglin) {
         piglin.removeMetadata("relic_trader", RelicsOfCthonia.getInstance());
     }
 
-    public void removeBarterMaterial(PiglinBarterEvent event){
+    public void removeBarterMaterial(PiglinBarterEvent event) {
         event.getEntity().removeBarterMaterial(event.getInput().getType());
     }
 
-    public void executeTradeMessage(PiglinBarterEvent event, String message){
-        Optional<Player> player = Optional.ofNullable(Bukkit.getPlayer(getCurrentTradeMap().get(event.getEntity().getUniqueId())));
+    public void executeTradeMessage(PiglinBarterEvent event, String messageKey) {
+        UUID uuid = getCurrentTradeMap().remove(event.getEntity().getUniqueId());
+        if (uuid == null) return;
 
-        getCurrentTradeMap().remove(event.getEntity().getUniqueId());
-        player.ifPresent(p -> Utils.sendRelicMessage(message, p));
+        Optional.ofNullable(Bukkit.getPlayer(uuid))
+                .ifPresent(p -> Utils.sendRelicMessage(messageKey, p));
     }
 
     @EventHandler
     public void onEntityDeathEvent(EntityDeathEvent e) {
         LivingEntity livingEntity = e.getEntity();
         if (!(livingEntity instanceof Piglin)) {
-           return;
+            return;
         }
 
         Piglin piglin = (Piglin) livingEntity;

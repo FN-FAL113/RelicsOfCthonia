@@ -27,7 +27,7 @@ public class LuminousPearl extends AbstractRelic {
 
     @Override
     public void onItemRightClick(PlayerInteractEvent event, Player player, ItemStack itemInOffhand) {
-        Utils.sendRelicMessage("&eThis pearl cannot be used anymore but damn its an epic relic, trade it instead!", player);
+        Utils.sendRelicMessage("luminous-pearl", player);
     }
 
 }

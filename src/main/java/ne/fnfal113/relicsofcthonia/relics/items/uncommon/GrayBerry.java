@@ -33,7 +33,7 @@ public class GrayBerry extends AbstractRelic {
             consumeRelic(itemInOffhand);
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1));
 
-            Utils.sendRelicMessage("&eOh this berry is something I would not eat again! I rather trade this to piglins.", player);
+            Utils.sendRelicMessage("gray-berry", player);
         }
     }
 

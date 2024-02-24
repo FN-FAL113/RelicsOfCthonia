@@ -27,7 +27,7 @@ public class HornOfTaurus extends AbstractRelic {
 
     @Override
     public void onItemRightClick(PlayerInteractEvent event, Player player, ItemStack itemInOffhand) {
-        Utils.sendRelicMessage("&eI wonder why would others want this horn but its worth trading off to piglins.", player);
+        Utils.sendRelicMessage("horn-of-taurus", player);
     }
 
 }

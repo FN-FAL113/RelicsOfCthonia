@@ -27,7 +27,7 @@ public class FervorHelmet extends AbstractRelic {
 
     @Override
     public void onItemRightClick(PlayerInteractEvent event, Player player, ItemStack itemInOffhand) {
-        Utils.sendRelicMessage("&eFervor helmet cannot be used anymore, trade it instead!", player);
+        Utils.sendRelicMessage("fervor-helmet", player);
     }
 
 }

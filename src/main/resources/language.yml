@@ -1,0 +1,1020 @@
+prefix: "&6[RelicsOfCthonia] > "
+slimefun-menu:
+  main: "&6Relics of Cthonia"
+  common: "&aCommon Relic"
+  uncommon: "&7Uncommon Relic"
+  rare: "&9Rare Relic"
+  epic: "&dEpic Relic"
+  legendary: "&6Legendary Relic"
+  misc: "&6Miscellaneous Items"
+voider:
+  inc-condition-name: "&cIncrement Condition Quota"
+  inc-condition-lore: "&7Click to increment the quota by 1"
+  dec-condition-name: "&cDecrement Condition Quota"
+  dec-condition-lore: "&7Click to decrement the quota by 1"
+  condition-quota-name: "&fVoids any %rarity% relic whose"
+  condition-quota-lore: "&fcondition is below &6&l%final_condition%%"
+messages:
+  piglin-in-trade: "&ePiglin is currently in trade!"
+  failed-trade: "&cFailed trade! piglin is not allowed to trade in the current location!"
+  failed-trade-not-relic: "&cFailed trade! the barter item you gave is not a cthonian relic."
+  failed-trade-condition: "&cUnsuccessful trade! piglin trader is not satisfied with the relic condition and got destroyed upon examining!"
+  successful-trade: "&aSuccessful trade! Piglin trader is happy to trade with you anytime!"
+  successful-trade-sf-command: "&aRelic obtained from sf give command, successful trade!"
+  placed-relic: "You placed a relic, it will not drop anything once broken!"
+  successfully-voided: "&6Successfully voided &r%item%"
+  used-pearl: "&eYou have been teleported to your target location using Cthonian Pearl"
+  fishing-sack-cant-store: "&eFishing sack cannot store any fish anymore, trade it instead!"
+  healing-potion-use: "&e2 points of health are added to you after using the healing potion!"
+  healing-potion-cant-use: "&cHealing potion cannot be used on your current health!"
+  cant-use-leather-helmet: "&eThis leather helmet cannot be used anymore, trade it instead!"
+  mushroom-not-edible: "&eMushroom is not edible! but you can trade it instead."
+  cant-use-marble-block: "&eThis marble block has no uses! you can trade it instead for something."
+  ring-suffering-destroyed: "&eRing of Suffering got destroyed upon usage and has punished you with weakness!"
+  bottle-o-power: "&eBottle o Power has granted you special effects! Time to rekt pvp'iers!"
+  fervor-helmet: "&eFervor helmet cannot be used anymore, trade it instead!"
+  flawless-aqua-gem: "&eThis gem has no uses but for its value, trade it instead!"
+  luminous-pearl: "&eThis pearl cannot be used anymore but damn its an epic relic, trade it instead!"
+  thunder-in-a-bottle: "&eYou have summoned a lightning on the target location!"
+  valiant-talisman: "&eValiant Talisman got destroyed upon usage and has granted you with health boost!"
+  eye-of-sauron-found: "&eEye of Sauron found a nearby player named  %player%  at x: %x% y: %y% z: %z%"
+  eye-of-sauron-didnt-find: "&eEye of Sauron did not find any nearby players!"
+  glazing-pearl: "&eGlazing pearl?! I better find a piglin trader to check what I can get from this."
+  magma-gauntlet: "&eWould have been great if I can wield this gauntlet but its too damn hot, I better trade this instead."
+  mysterious-holocron-gone: "&eWoah what happened to those entities! are they gone forever?!"
+  mysterious-holocron-destroyed: "&eMysterious holocron got destroyed?! I wonder if there are any nearby entities, what would happen eh"
+  sapphire-ring: "&eWhat a precious stone this ring have, piglin traders want this so bad."
+  skull-of-prometheus: "&eThis skull is a powerful one, it gave me conduit power for trying to wear it but it got destroyed."
+  blaze-ashes: "&eWoah, what was that effect. I'll just trade this relic instead next time."
+  cerulean-gem: "&eI should trade this gem, might be a worth of fortune but who knows."
+  crossed-swords: "&eThese swords are too old and fragile to be used in combat, I'll trade it instead."
+  golden-jar: "&eTime to find a piglin trader, this jar might be something worth trading off!"
+  horn-of-taurus: "&eI wonder why would others want this horn but its worth trading off to piglins."
+  marriage-ring: "&eWhat a historic ring, hoping these would have a place in others hand, now where can I find piglins."
+  terracotta-pot: "&eAnother worthless pot but it has historical value, I should trade it to piglins instead."
+  aged-wine: "&eAged wine consumed! you feeling the booz there ah."
+  blue-glowstone: "&eBlue glowstone has no uses, its old and broken but you can trade it to piglins."
+  cthonian-token: "&eThis might be worth trading off to piglins since I have no uses for it."
+  gray-berry: "&eOh this berry is something I would not eat again! I rather trade this to piglins."
+  pink-salt: "&eAfter consuming it, you get slow falling effect for no reason!"
+  skull-hat: "&eThis skull hat can be traded to piglins only, it has no uses!"
+  tanzanite-block: "&eWhat a good looking block but it can only be traded to piglins."
+
+
+relic-settings:
+  nether-quartz-ore: nether quartz ore
+  warped-nylium: warped nylium
+  netherrack: netherrack
+  strider: strider
+  hoglin: hoglin
+  piglin: piglin
+  gold-ingot: gold ingot
+  silver-ingot: silver ingot
+  copper-wire: copper wire
+  ancient-debris: ancient debris
+  podzol: podzol
+  wither-skeleton: wither skeleton
+  iron-ore: iron ore
+  mycelium: mycelium
+  skeleton: skeleton
+  magma-cube: magma cube
+  blackstone: blackstone
+  gravel: gravel
+  zombified-piglin: zombified piglin
+  blaze: blaze
+  clay: clay
+  soul-soil: soul soil
+  ghast: ghast
+  piglin-brute: piglin brute
+  copper-ingot: copper ingot
+  soul-sand: soul sand
+  nether-gold-ore: nether gold ore
+  zoglin: zoglin
+  bookshelf: bookshelf
+  warped-wart-block: warped wart block
+  bronze-ingot: bronze ingot
+  gold-ore: gold ore
+  magma-block: magma block
+  basic-circuit-board: basic circuit board
+  crimson-nylium: crimson nylium
+  repeater: repeater
+  aluminum-bronze-ingot: aluminum bronze ingot
+  electric-motor: electric motor
+  nether-wart-block: nether wart block
+  sword-of-beheading: sword of beheading
+  seismic-axe: seismic axe
+  energy-regulator: energy regulator
+  basalt: basalt
+  electric-dust-washer: electric dust washer
+  solar-generator-2: solar generator 2
+  carbon: carbon
+  synthetic-sapphire: synthetic sapphire
+  aluminum-brass-ingot: aluminum brass ingot
+  solar-generator-4: solar generator 4
+  large-capacitor: large capacitor
+  programmable-android-2: programmable android 2
+  gilded-iron-chestplate: gilded iron chestplate
+  explosive-bow: explosive bow
+  redstone-alloy: redstone alloy
+  gold-12k-leggings: gold 12k leggings
+  carbonado: carbonado
+  plastic-sheet: plastic sheet
+  icy-bow: icy bow
+  carbonado-edged-capacitor: carbonado edged capacitor
+
+###########################################################
+# These words MUST match words in item lore.              #
+# Plugin will use them to inject "Conditions" and "Drops" #
+###########################################################
+drops-on: "Drops on:"
+possible-piglin-reward: "Possible Piglin reward:"
+
+
+common-relic-cthonian-pearl:
+  lore:
+    - ''
+    - '&bCommonly used by cthonians for'
+    - '&btransportation and are widely'
+    - '&bscattered in the waste due to'
+    - '&bhigh amount of produced pearls'
+    - ''
+    - '&dRarity: &aCommon'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&aCthonian Pearl'
+common-relic-ring-of-suffering:
+  lore:
+    - ''
+    - '&bThis ring is given to sinners of'
+    - '&bCthonia as a punishment for the'
+    - '&bsins made against the polis or'
+    - '&bcity.'
+    - ''
+    - '&dRarity: &aCommon'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&aRing of Suffering'
+common-relic-fishing-sack:
+  lore:
+    - ''
+    - '&bUsed by the fishermen of Cthonia'
+    - '&bto store caught fish and worn as'
+    - '&bbackpack or cape for ease use'
+    - ''
+    - '&dRarity: &aCommon'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&aFishing Sack'
+common-relic-petty-marble-block:
+  lore:
+    - ''
+    - '&bA common marble block from the'
+    - '&bquarries of cthonia, petty but'
+    - '&bit still holds a little value'
+    - ''
+    - '&dRarity: &aCommon'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&aPetty Marble Block'
+common-relic-healing-potion:
+  lore:
+    - ''
+    - '&bPreserved healing potion that'
+    - '&bwere used by the people of'
+    - '&bcthonia, may not be as effective'
+    - '&banymore but handy to have'
+    - ''
+    - '&dRarity: &aCommon'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&aHealing Potion'
+common-relic-leather-helmet:
+  lore:
+    - ''
+    - '&bCommonly used by cthonian'
+    - '&barmy specifically lower'
+    - '&branked soldiers. Light to'
+    - '&buse and gives more agile'
+    - ''
+    - '&dRarity: &aCommon'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&aLeather helmet'
+common-relic-mushroom:
+  lore:
+    - ''
+    - '&bUsually stored under the ground'
+    - '&bwith a cover to preserve and is'
+    - '&ba survival delicacy, commonly'
+    - '&bfound in the outskirts of cthonia'
+    - '&b and gives a good amount of energy'
+    - '&bwhen consumed'
+    - ''
+    - '&dRarity: &aCommon'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&aMushroom'
+uncommon-relic-pink-salt:
+  lore:
+    - ''
+    - '&bAn ingredient used for brewing'
+    - '&bpotions which are found in the'
+    - '&bin the thrace region of cthonia'
+    - ''
+    - '&dRarity: &7Uncommon'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&7Pink Salt'
+uncommon-relic-skull-hat:
+  lore:
+    - ''
+    - '&bWorn during the celebration of'
+    - '&bthe dead. Not commonly found'
+    - '&bsince its only a seasonal item'
+    - ''
+    - '&dRarity: &7Uncommon'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&7Skull Hat'
+uncommon-relic-cthonian-token:
+  lore:
+    - ''
+    - '&bA currency for paying goods'
+    - '&band services. Exact currency'
+    - '&bis unknown though'
+    - ''
+    - '&dRarity: &7Uncommon'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&7Cthonian Token'
+uncommon-relic-aged-wine:
+  lore:
+    - ''
+    - '&b200+ years aged wine that'
+    - '&bare leftovers of desolated'
+    - '&bcthonia.'
+    - ''
+    - '&dRarity: &7Uncommon'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&7Aged Wine'
+uncommon-relic-tanzanite-block:
+  lore:
+    - ''
+    - '&bUncommon mineral block that'
+    - '&bcthonians mine in the quarries'
+    - '&bthey haven''t fully excavated'
+    - ''
+    - '&dRarity: &7Uncommon'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&7Tanzanite Block'
+uncommon-relic-blue-glowstone:
+  lore:
+    - ''
+    - '&bA lighting block uncommonly seen'
+    - '&bin some cthonian buildings'
+    - ''
+    - '&dRarity: &7Uncommon'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&7Blue Glowstone'
+uncommon-relic-gray-berry:
+  lore:
+    - ''
+    - '&bI wonder why these are colored'
+    - '&bgray but these berries are'
+    - '&bpreserved well under the grounds'
+    - ''
+    - '&dRarity: &7Uncommon'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&7Gray Berry'
+rare-relic-marriage-ring:
+  lore:
+    - ''
+    - '&bA special ring sought of by'
+    - '&bcthonian researchers for whom'
+    - '&bthey belong to'
+    - ''
+    - '&dRarity: &9Rare'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&9Marriage Ring'
+rare-relic-blaze-ashes:
+  lore:
+    - ''
+    - '&bLeftover ashes during the'
+    - '&bdesolation of cthonia, it'
+    - '&bholds an element unknown to'
+    - '&bcthonian researchers'
+    - ''
+    - '&dRarity: &9Rare'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&9Blaze Ashes'
+rare-relic-crossed-swords:
+  lore:
+    - ''
+    - '&bDropped by soldiers during the'
+    - '&bcthonian war of roses. Cannot'
+    - '&bbe used in combat due to its'
+    - '&bcondition but a rare relic to have'
+    - ''
+    - '&dRarity: &9Rare'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&9Crossed Swords'
+rare-relic-cerulean-gem:
+  lore:
+    - ''
+    - '&bA rare gem that can only be found'
+    - '&bcon the baltic region of cthonia.'
+    - ''
+    - '&dRarity: &9Rare'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&9Cerulean Gem'
+rare-relic-terracotta-pot:
+  lore:
+    - ''
+    - '&bRare potteries rich in floral'
+    - '&bpaintings that depicts the daily'
+    - '&blife of cthonian people'
+    - ''
+    - '&dRarity: &9Rare'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&9Terracotta Pot'
+rare-relic-golden-jar:
+  lore:
+    - ''
+    - '&bShiny golden jars from the early'
+    - '&bcthonic age that are kept only'
+    - '&bby the high politeia'
+    - ''
+    - '&dRarity: &9Rare'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&9Golden Jar'
+rare-relic-horn-of-taurus:
+  lore:
+    - ''
+    - '&bOne of the rare items that were'
+    - '&bsought off by relic traders due'
+    - '&bto its historical value'
+    - ''
+    - '&dRarity: &9Rare'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&9Horn of Taurus'
+epic-relic-luminous-pearl:
+  lore:
+    - ''
+    - '&bA shiny bright pearl only found'
+    - '&bunder the black oceans of cthonia'
+    - ''
+    - '&dRarity: &dEpic'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&dLuminous Pearl'
+epic-relic-valiant-talisman:
+  lore:
+    - ''
+    - '&bOnly awarded to high ranked soldiers'
+    - '&bof cthonia and symbolizes valor as'
+    - '&bdepicted in cthonian war of attrition'
+    - ''
+    - '&dRarity: &dEpic'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&dValiant Talisman'
+epic-relic-flawless-aqua-gem:
+  lore:
+    - ''
+    - '&bGem collectors are anticipated of'
+    - '&bthis gem. It can only be mined under'
+    - '&bthe vast white oceans of cthonia'
+    - ''
+    - '&dRarity: &dEpic'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&dFlawless Aqua Gem'
+epic-relic-bottle-o-power:
+  lore:
+    - ''
+    - '&bMagically filled bottle that aims'
+    - '&bto give cthonian soldiers advantage'
+    - '&bin combat by increasing their overall'
+    - '&bstrength and logical thinking'
+    - ''
+    - '&dRarity: &dEpic'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&dBottle o Power'
+epic-relic-fervor-helmet:
+  lore:
+    - ''
+    - '&bHelmet of Fervor who fought until his'
+    - '&bdemise, such replicas exist with the'
+    - '&bblessing of fervor that traders are'
+    - '&bsearching for'
+    - ''
+    - '&dRarity: &dEpic'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&dFervor Helmet'
+epic-relic-thunder-in-a-bottle:
+  lore:
+    - ''
+    - '&bOne can summon a thunder with this'
+    - '&bfilled bottle and cause chaos in the'
+    - '&bpath of warriors'
+    - ''
+    - '&dRarity: &dEpic'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&dThunder In A Bottle'
+legendary-relic-mysterious-holocron:
+  lore:
+    - ''
+    - '&bFound in dwemer dungeons of cthonia'
+    - '&bwhere it is highly sought off by'
+    - '&bresearchers due to its historical'
+    - '&bvalue and knowledge'
+    - ''
+    - '&dRarity: &6Legendary'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&6Mysterious Holocron'
+legendary-relic-eye-of-sauron:
+  lore:
+    - ''
+    - '&bThe legendary of eye of sauron'
+    - '&bwhich can be obtained by killing'
+    - '&bthe high ainur guards of sauron'
+    - '&btower'
+    - ''
+    - '&dRarity: &6Legendary'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&6Eye of Sauron'
+legendary-relic-skull-of-prometheus:
+  lore:
+    - ''
+    - '&bThe legendary skull of prometheus'
+    - '&bdroppped by slaying prometheus mobs'
+    - '&bin the dark valleys of cthonia'
+    - ''
+    - '&dRarity: &6Legendary'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&6Skull of Prometheus'
+legendary-relic-magma-gauntlet:
+  lore:
+    - ''
+    - '&bOnly the mighty can obtain this item'
+    - '&bfrom the depths of hellica, a magma'
+    - '&bformed gauntlet from the ancient past'
+    - '&bduring the golden age of cthonia'
+    - ''
+    - '&dRarity: &6Legendary'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&6Magma Gauntlet'
+legendary-relic-glazing-pearl:
+  lore:
+    - ''
+    - '&bOh glazing pearl, I seek for wisdom'
+    - '&band knowledge to relive the past for'
+    - '&bwhen cthonia still exist'
+    - ''
+    - '&dRarity: &6Legendary'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&6Glazing Pearl'
+legendary-relic-sapphire-ring:
+  lore:
+    - ''
+    - '&bOnly cthonian kings can posses this'
+    - '&bsapphire ring for which it symbolizes'
+    - '&bthe prosperity of cthonia'
+    - ''
+    - '&dRarity: &6Legendary'
+    - '&dCondition: &d%'
+    - ''
+    - '&eDrop chance: &e%'
+    - '&eDrops on:'
+    - ''
+    - '&aPiglin trade chance:'
+    - '&a‣ Depends on Relic Condition'
+    - '&aPossible Piglin reward:'
+    - ''
+    - '&eRight click a piglin to'
+    - '&etrade this relic'
+    - ''
+    - '&eRight click this relic in your'
+    - '&eoffhand to check for uses'
+    - ''
+    - '&6Φ Relics of Cthonia Φ'
+  name: '&6Sapphire Ring'
+common-relic-voider:
+  lore:
+    - ''
+    - '&aVoids any common relics you pickup'
+    - '&awhich are under the condition quota'
+    - ''
+    - '&dRight click to set a condition'
+    - '&dquota for the voider'
+  name: '&aCommon Relic Voider'
+uncommon-relic-voider:
+  lore:
+    - ''
+    - '&7Voids any uncommon relics you pickup'
+    - '&7which are under the condition quota'
+    - ''
+    - '&dRight click to set a condition'
+    - '&dquota for the voider'
+  name: '&7Uncommon Relic Voider'
+rare-relic-voider:
+  lore:
+    - ''
+    - '&9Voids any rare relics you pickup'
+    - '&9which are under the condition quota'
+    - ''
+    - '&dRight click to set a condition'
+    - '&dquota for the voider'
+  name: '&9Rare Relic Voider'
+epic-relic-voider:
+  lore:
+    - ''
+    - '&dVoids any epic relics you pickup'
+    - '&dwhich are under the condition quota'
+    - ''
+    - '&dRight click to set a condition'
+    - '&dquota for the voider'
+  name: '&dEpic Relic Voider'
+legendary-relic-voider:
+  lore:
+    - ''
+    - '&6Voids any legendary relics you pickup'
+    - '&6which are under the condition quota'
+    - ''
+    - '&dRight click to set a condition'
+    - '&dquota for the voider'
+  name: '&6Legendary Relic Voider'
+relic-drop-type:
+  lore:
+    - ''
+    - '&eObtain this item by mining materials'
+    - '&eor killing mobs according to the'
+    - '&eitem lore of the relic'
+  name: '&6Drop type'

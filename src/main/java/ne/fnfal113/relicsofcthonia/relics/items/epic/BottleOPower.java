@@ -35,7 +35,7 @@ public class BottleOPower extends AbstractRelic {
         player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 400, 1));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 400, 0));
 
-        Utils.sendRelicMessage("&eBottle o Power has granted you special effects! Time to rekt pvp'iers!", player);
+        Utils.sendRelicMessage("bottle-o-power", player);
     }
 
 }

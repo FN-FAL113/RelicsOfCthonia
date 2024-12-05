@@ -33,7 +33,7 @@ public class SkullOfPrometheus extends AbstractRelic {
             consumeRelic(itemInOffhand);
             player.addPotionEffect(new PotionEffect(PotionEffectType.CONDUIT_POWER, 500, 1));
 
-            Utils.sendRelicMessage("&eThis skull is a powerful one, it gave me conduit power for trying to wear it but it got destroyed.", player);
+            Utils.sendRelicMessage("skull-of-prometheus", player);
         }
     }
 }

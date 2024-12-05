@@ -24,6 +24,8 @@ public class MobKillListener implements Listener {
 
     @Getter
     private final Map<AbstractRelic, List<String>> whereToDropMobMap = RelicsOfCthonia.getInstance().getRelicsRegistry().getWhereToDropMobMap();
+    @Getter
+    private final double globalChanceMultiplier = RelicsOfCthonia.getInstance().getConfig().getDouble("global-chance-multiplier", 1.0);
 
     @EventHandler
     public void onMobSpawn(CreatureSpawnEvent event){
@@ -86,7 +88,7 @@ public class MobKillListener implements Listener {
                     double randomOrigin = currentRandomThread.nextDouble(0.0, 60);
                     double randomNum = ThreadLocalRandom.current().nextDouble(randomOrigin, 100);
 
-                    if(randomNum < abstractRelic.getDropChance()) {
+                    if(randomNum < abstractRelic.getDropChance()*globalChanceMultiplier) {
                         ItemStack drop = abstractRelic.setRelicConditionAndGet(true, 0);
                         
                         Utils.createSyncTask(syncTask -> livingEntity.getWorld().dropItemNaturally(livingEntity.getLocation(), drop));

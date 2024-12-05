@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class Utils {
@@ -19,9 +20,22 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', strings);
     }
 
-    public static void sendRelicMessage(String message, LivingEntity livingEntity){
-        livingEntity.sendMessage(colorTranslator("&6[RelicsOfCthonia] > " + message));
+    public static void sendRelicMessage(String messageKey, LivingEntity livingEntity){
+        String prefix = RelicsOfCthonia.locale().string("prefix");
+        String m = RelicsOfCthonia.locale().string("messages."+messageKey);
+        livingEntity.sendMessage(colorTranslator( prefix+m));
     }
+
+    public static void sendRelicMessage(String messageKey, LivingEntity livingEntity, Map<String, String> replace){
+        String prefix = RelicsOfCthonia.locale().string("prefix");
+        String m = RelicsOfCthonia.locale().string("messages."+messageKey);
+        for(Map.Entry<String, String> entry : replace.entrySet()){
+            m = m.replace(entry.getKey(), entry.getValue());
+        }
+        livingEntity.sendMessage(colorTranslator( prefix+m));
+    }
+
+
 
     // set or update the given string to replace with the given config section
     // and settings that returns an integer value as the new string.
@@ -70,6 +84,7 @@ public class Utils {
         ConfigManager configManager = RelicsOfCthonia.getInstance().getConfigManager();
         ItemMeta meta = itemStack.getItemMeta();
         List<String> lore = meta.getLore();
+        if(lore == null) return;
         int j = 0;
 
         for(int i = 0 ; i < lore.size(); i++){
@@ -81,9 +96,10 @@ public class Utils {
 
         for (int x = 0; x < configManager.getCustomConfig(configFileName).getStringList(section + "." + settings).size(); x++) {
             String value = configManager.getCustomConfig("relic-settings").getStringList(section + "." + settings).get(x);
+            String translatedString = RelicsOfCthonia.locale().string("relic-settings."+value.toLowerCase().replace("_", "-"));
 
             if(!value.isEmpty()) {
-                lore.add(j + 1, Utils.colorTranslator(color + prefix + value.replace("_", " ").toLowerCase()));
+                lore.add(j + 1, Utils.colorTranslator(color + prefix + translatedString));
             }
         }
 

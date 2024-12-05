@@ -27,6 +27,6 @@ public class TerracottaPot extends AbstractRelic {
 
     @Override
     public void onItemRightClick(PlayerInteractEvent event, Player player, ItemStack itemInOffhand) {
-        Utils.sendRelicMessage("&eAnother worthless pot but it has historical value, I should trade it to piglins instead.", player);
+        Utils.sendRelicMessage("terracotta-pot", player);
     }
 }

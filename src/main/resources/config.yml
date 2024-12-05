@@ -3,3 +3,8 @@ auto-update: true
 ## Disable this if don't want to receive
 ## chat messages regarding voided relics
 enable-relic-voider-notif: true
+
+append-source-to-lore: true
+append-trades-to-lore: true
+global-chance-multiplier: 1.0
+disable-relic-placement: true

@@ -23,7 +23,7 @@ public class MysteriousHolocron extends AbstractRelic {
 
     @ParametersAreNonnullByDefault
     public MysteriousHolocron(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe,
-                       double dropChance, int piglinRewardAmount, int defaultDropSize) {
+        double dropChance, int piglinRewardAmount, int defaultDropSize) {
         super(itemGroup, item, recipeType, recipe, dropChance, piglinRewardAmount, defaultDropSize);
     }
 
@@ -37,7 +37,7 @@ public class MysteriousHolocron extends AbstractRelic {
         List<Entity> entityList = new ArrayList<>();
 
         for (Entity en : player.getNearbyEntities(30, 30, 30)) {
-            if(!(en instanceof Player) && Slimefun.getProtectionManager().hasPermission(Bukkit.getOfflinePlayer(player.getUniqueId()), en.getLocation(), Interaction.INTERACT_ENTITY)){
+            if(! (en instanceof Player) && Slimefun.getProtectionManager().hasPermission(Bukkit.getOfflinePlayer(player.getUniqueId()), en.getLocation(), Interaction.INTERACT_ENTITY)) {
                 entityList.add(en);
 
                 en.getWorld().spawnParticle(Particle.FLASH, en.getLocation(), 0);
@@ -46,7 +46,8 @@ public class MysteriousHolocron extends AbstractRelic {
         }
 
         consumeRelic(itemInOffhand);
-        if(!entityList.isEmpty()) {
+
+        if (! entityList.isEmpty()) {
             Utils.sendRelicMessage("&eWoah what happened to those entities! are they gone forever?!", player);
         } else {
             Utils.sendRelicMessage("&eMysterious holocron got destroyed?! I wonder if there are any nearby entities, what would happen eh", player);

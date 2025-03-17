@@ -18,7 +18,7 @@ public class PinkSalt extends AbstractRelic {
 
     @ParametersAreNonnullByDefault
     public PinkSalt(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe,
-                    double dropChance, int piglinRewardAmount, int defaultDropSize) {
+        double dropChance, int piglinRewardAmount, int defaultDropSize) {
         super(itemGroup, item, recipeType, recipe, dropChance, piglinRewardAmount, defaultDropSize);
     }
 
@@ -30,8 +30,9 @@ public class PinkSalt extends AbstractRelic {
 
     @Override
     public void onItemRightClick(PlayerInteractEvent event, Player player, ItemStack itemInOffhand) {
-        if(!player.hasPotionEffect(PotionEffectType.SLOW_FALLING)){
+        if (! player.hasPotionEffect(PotionEffectType.SLOW_FALLING)) {
             consumeRelic(itemInOffhand);
+            
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 120, 1));
 
             Utils.sendRelicMessage("&eAfter consuming it, you get slow falling effect for no reason!", player);

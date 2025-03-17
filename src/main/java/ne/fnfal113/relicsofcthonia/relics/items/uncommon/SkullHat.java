@@ -16,7 +16,7 @@ public class SkullHat extends AbstractRelic {
 
     @ParametersAreNonnullByDefault
     public SkullHat(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe,
-                    double dropChance, int piglinRewardAmount, int defaultDropSize) {
+        double dropChance, int piglinRewardAmount, int defaultDropSize) {
         super(itemGroup, item, recipeType, recipe, dropChance, piglinRewardAmount, defaultDropSize);
     }
 

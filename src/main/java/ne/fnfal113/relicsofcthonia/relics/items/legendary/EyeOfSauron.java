@@ -33,17 +33,18 @@ public class EyeOfSauron extends AbstractRelic {
         List<Player> playerList = new ArrayList<>();
 
         for (Entity en : player.getNearbyEntities(100, 60, 100)) {
-            if(en instanceof Player){
+            if (en instanceof Player) {
                 int x = (int) player.getLocation().getX();
                 int y = (int) player.getLocation().getY();
                 int z = (int) player.getLocation().getZ();
 
                 playerList.add((Player) en);
-                Utils.sendRelicMessage("&eEye of Sauron found a nearby player named " + player.getName() + " at x: " + x + " y: " + y + " z: " + z, player);
+
+                Utils.sendRelicMessage("&eEye of Sauron found a nearby player named " + player.getName() + " at given coordinate x: " + x + " y: " + y + " z: " + z, player);
             }
         }
 
-        if(playerList.isEmpty()){
+        if (playerList.isEmpty()) {
             Utils.sendRelicMessage("&eEye of Sauron did not find any nearby players!", player);
         }
 

@@ -5,7 +5,6 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import lombok.Getter;
 import ne.fnfal113.relicsofcthonia.RelicsOfCthonia;
 import ne.fnfal113.relicsofcthonia.RelicsRegistry;
 import ne.fnfal113.relicsofcthonia.config.ConfigManager;
@@ -29,17 +28,16 @@ import java.util.function.Consumer;
 
 public abstract class AbstractRelic extends SlimefunItem implements OffHandRightClickHandler {
 
-    @Getter
     private final double dropChance;
-    @Getter
+
     private final int defaultDropSize;
-    @Getter
+    
     private final int piglinRewardAmount;
-    @Getter
+    
     private final List<Material> netherMaterials = new ArrayList<>();
-    @Getter
+    
     private final ConfigManager configManager = RelicsOfCthonia.getInstance().getConfigManager();
-    @Getter
+    
     private final RelicsRegistry relicsRegistry = RelicsOfCthonia.getInstance().getRelicsRegistry();
 
     @ParametersAreNonnullByDefault
@@ -48,13 +46,15 @@ public abstract class AbstractRelic extends SlimefunItem implements OffHandRight
         super(itemGroup, item, recipeType, recipe);
 
         initializeSettings(dropChance, piglinRewardAmount, defaultDropSize);
+        
         this.dropChance = getConfigManager().getCustomConfig("relic-settings").getDouble(this.getId() + "." + "drop-chance");
         this.piglinRewardAmount = getConfigManager().getCustomConfig("relic-settings").getInt(this.getId() + "." + "piglin-reward-amount");
         this.defaultDropSize = defaultDropSize;
+        
         updateRelicLore();
     }
 
-    public void updateRelicLore(){
+    public void updateRelicLore() {
        // update this itemstack object lore for the drop chance
        Utils.setLoreByConfigValue(this.getItem(), this.getId(), "drop-chance", "%", "&e", "%", "relic-settings");
        // update this itemstack object lore on which materials do relic drop
@@ -65,7 +65,7 @@ public abstract class AbstractRelic extends SlimefunItem implements OffHandRight
        Utils.setLoreByConfigStringList(this.getItem(), this.getId(), "piglin-barter-rewards", "Possible Piglin reward:", "&a", "‣ " + getPiglinRewardAmount() + " ", "", "relic-settings");
     }
 
-    public void initializeSettings(double dropChance, int piglinRewardAmount, int defaultDropSize){
+    public void initializeSettings(double dropChance, int piglinRewardAmount, int defaultDropSize) {
         initNetherMaterials();
 
         // configuration handling
@@ -76,13 +76,13 @@ public abstract class AbstractRelic extends SlimefunItem implements OffHandRight
         setRelicsRegistry();
     }
 
-    public void setRelicsRegistry(){
+    public void setRelicsRegistry() {
         // load this relic config values to relicRegistry including newly added ones by an any admin
         try {
             FileConfiguration config = getConfigManager().getCustomConfig("relic-settings");
 
             // retrieve this relic's config material list then add to relic registry
-            if(config.isConfigurationSection(this.getId()) && config.getConfigurationSection(this.getId()).contains("drops-on-material")) {
+            if (config.isConfigurationSection(this.getId()) && config.getConfigurationSection(this.getId()).contains("drops-on-material")) {
                 List<Material> finalMaterialList = new ArrayList<>();
 
                 for (String materials : config.getConfigurationSection(this.getId()).getStringList("drops-on-material")) {
@@ -93,14 +93,14 @@ public abstract class AbstractRelic extends SlimefunItem implements OffHandRight
             }
 
             // retrieve this relic's config mob list then add to relic registry
-            if(config.isConfigurationSection(this.getId()) && config.getConfigurationSection(this.getId()).contains("drops-on-mob")) {
+            if (config.isConfigurationSection(this.getId()) && config.getConfigurationSection(this.getId()).contains("drops-on-mob")) {
                 List<String> finalMobList = config.getConfigurationSection(this.getId()).getStringList("drops-on-mob");
 
                 getRelicsRegistry().getWhereToDropMobMap().put(this, finalMobList);
             }
 
             // retrieve this relic's config rewards list then add to relic registry
-            if(config.isConfigurationSection(this.getId()) && config.getConfigurationSection(this.getId()).contains("piglin-barter-rewards")) {
+            if (config.isConfigurationSection(this.getId()) && config.getConfigurationSection(this.getId()).contains("piglin-barter-rewards")) {
                 List<String> finalRewardList = config.getConfigurationSection(this.getId()).getStringList("piglin-barter-rewards");
 
                 getRelicsRegistry().getPiglinRewardList().put(this, finalRewardList);
@@ -111,7 +111,7 @@ public abstract class AbstractRelic extends SlimefunItem implements OffHandRight
         }
     }
 
-    public void initNetherMaterials(){
+    public void initNetherMaterials() {
         getNetherMaterials().addAll(NetherMaterials.BASE_STONES_NETHER.getMaterial());
         getNetherMaterials().addAll(NetherMaterials.WART_BLOCKS.getMaterial());
         getNetherMaterials().addAll(NetherMaterials.GROW_MUSHROOM_BLOCKS.getMaterial());
@@ -123,8 +123,9 @@ public abstract class AbstractRelic extends SlimefunItem implements OffHandRight
     public void initSingleSectionSettings(double dropChance, int piglinRewardAmount) {
         try {
             getConfigManager().initializeConfig(this.getId(), "drop-chance", dropChance, "relic-settings");
+            
             getConfigManager().initializeConfig(this.getId(), "piglin-reward-amount", piglinRewardAmount, "relic-settings");
-        } catch (IllegalArgumentException | NullPointerException e){
+        } catch (IllegalArgumentException | NullPointerException e) {
             RelicsOfCthonia.getInstance().getLogger().info("An error has occurred upon initializing default single section settings! Please report on github issue tracker!");
             e.printStackTrace();
         }
@@ -140,10 +141,10 @@ public abstract class AbstractRelic extends SlimefunItem implements OffHandRight
             // create a randomized mob list, size determined dy this object default drop size
             for (int i = 0; i < defaultDropSize; i++) {
                 String mob = jsonObject
-                                .getAsJsonPrimitive("nether_mob_" + ThreadLocalRandom.current().nextInt(1, 12))
-                                    .getAsString();
+                    .getAsJsonPrimitive("nether_mob_" + ThreadLocalRandom.current().nextInt(1, 12))
+                    .getAsString();
 
-                if(!randomMobList.contains(mob)) {
+                if (! randomMobList.contains(mob)) {
                     randomMobList.add(mob);
                 }
             }
@@ -151,17 +152,17 @@ public abstract class AbstractRelic extends SlimefunItem implements OffHandRight
             // create a randomized material list, size determined dy this object default drop size
             for (int i = 0; i < defaultDropSize; i++) {
                 String material = getNetherMaterials()
-                                    .get(ThreadLocalRandom.current().nextInt(0, getNetherMaterials().size()))
-                                        .toString();
+                    .get(ThreadLocalRandom.current().nextInt(0, getNetherMaterials().size()))
+                    .toString();
 
-                if(!randomMaterialList.contains(material)) {
+                if (! randomMaterialList.contains(material)) {
                     randomMaterialList.add(material);
                 }
             }
 
             getConfigManager().initializeConfig(this.getId(), "drops-on-mob", randomMobList, "relic-settings");
             getConfigManager().initializeConfig(this.getId(), "drops-on-material", randomMaterialList, "relic-settings");
-        } catch (IllegalArgumentException | NullPointerException e){
+        } catch (IllegalArgumentException | NullPointerException e) {
             RelicsOfCthonia.getInstance().getLogger().info("An error has occurred upon initializing default drop settings! Please report on github issue tracker!");
             e.printStackTrace();
         }
@@ -176,17 +177,17 @@ public abstract class AbstractRelic extends SlimefunItem implements OffHandRight
             // create a randomized reward list, size determined dy this object default drop size
             for (int i = 1; i <= defaultDropSize; i++) {
                 String reward = jsonObject
-                                    .getAsJsonObject(getRarity().name())
-                                        .get("drop-" + ThreadLocalRandom.current().nextInt(1,8))
-                                            .getAsString();
+                    .getAsJsonObject(getRarity().name())
+                    .get("drop-" + ThreadLocalRandom.current().nextInt(1,8))
+                    .getAsString();
 
-                if(!randomRewardList.contains(reward)) {
+                if ( !randomRewardList.contains(reward)) {
                     randomRewardList.add(reward);
                 }
             }
 
             getConfigManager().initializeConfig(this.getId(), "piglin-barter-rewards", randomRewardList, "relic-settings");
-        } catch (IllegalArgumentException | NullPointerException e){
+        } catch (IllegalArgumentException | NullPointerException e) {
             RelicsOfCthonia.getInstance().getLogger().info("An error has occurred upon initializing default piglin rewards! Please report on github issue tracker!");
             e.printStackTrace();
         }
@@ -211,14 +212,14 @@ public abstract class AbstractRelic extends SlimefunItem implements OffHandRight
         return itemStack.getItemMeta().getPersistentDataContainer().getOrDefault(Utils.createKey("relic_condition"), PersistentDataType.INTEGER, 0);
     }
 
-    public <T extends OffHandRightClickHandler> void callRelicHandler(Class<T> clazz, Consumer<T> callback, AbstractRelic abstractRelic){
-        if(clazz.isInstance(abstractRelic)){
+    public <T extends OffHandRightClickHandler> void callRelicHandler(Class<T> clazz, Consumer<T> callback, AbstractRelic abstractRelic) {
+        if (clazz.isInstance(abstractRelic)) {
             callback.accept(clazz.cast(abstractRelic));
         }
     }
 
-    public void consumeRelic(ItemStack itemStack){
-        if(itemStack == null){
+    public void consumeRelic(ItemStack itemStack) {
+        if (itemStack == null) {
             return;
         }
 
@@ -232,13 +233,37 @@ public abstract class AbstractRelic extends SlimefunItem implements OffHandRight
     public abstract Rarity getRarity();
 
     @Override
-    public boolean isDisenchantable(){
+    public boolean isDisenchantable() {
         return false;
     }
 
     @Override
-    public boolean isEnchantable(){
+    public boolean isEnchantable() {
         return false;
+    }
+
+    public double getDropChance() {
+        return dropChance;
+    }
+
+    public int getDefaultDropSize() {
+        return defaultDropSize;
+    }
+
+    public int getPiglinRewardAmount() {
+        return piglinRewardAmount;
+    }
+
+    public List<Material> getNetherMaterials() {
+        return netherMaterials;
+    }
+
+    public ConfigManager getConfigManager() {
+        return configManager;
+    }
+
+    public RelicsRegistry getRelicsRegistry() {
+        return relicsRegistry;
     }
 
 }

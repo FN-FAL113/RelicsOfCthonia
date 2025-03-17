@@ -29,8 +29,9 @@ public class RingOfSuffering extends AbstractRelic {
 
     @Override
     public void onItemRightClick(PlayerInteractEvent event, Player player, ItemStack itemInOffhand) {
-        if(!player.hasPotionEffect(PotionEffectType.WEAKNESS)){
+        if (! player.hasPotionEffect(PotionEffectType.WEAKNESS)) {
             consumeRelic(itemInOffhand);
+            
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 160, 1));
 
             Utils.sendRelicMessage("&eRing of Suffering got destroyed upon usage and has punished you with weakness!", player);

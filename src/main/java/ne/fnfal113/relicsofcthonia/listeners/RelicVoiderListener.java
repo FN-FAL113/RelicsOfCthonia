@@ -24,46 +24,48 @@ import java.util.function.Predicate;
 public class RelicVoiderListener implements Listener {
 
     @EventHandler
-    public void onChestMenuClick(InventoryClickEvent event){
-        if(event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR){
+    public void onChestMenuClick(InventoryClickEvent event) {
+        if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR) {
             return;
         }
 
         InventoryView inventoryView = event.getView();
+
         Player player = (Player) event.getWhoClicked();
 
-        if(player.getInventory().getItemInMainHand().getType() == Material.AIR){
+        if (player.getInventory().getItemInMainHand().getType() == Material.AIR) {
             return;
         }
 
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         ItemMeta meta = itemStack.getItemMeta();
 
-        if(!meta.hasDisplayName()){
+        if (! meta.hasDisplayName()) {
             return;
         }
 
-        if(!inventoryView.getTitle().equals(Utils.colorTranslator(meta.getDisplayName()))){
+        if (! inventoryView.getTitle().equals(Utils.colorTranslator(meta.getDisplayName()))) {
             return;
         }
 
         Optional<SlimefunItem> slimefunItem = Optional.ofNullable(SlimefunItem.getByItem(itemStack));
 
         slimefunItem.ifPresent(sfItem -> {
-            if(sfItem instanceof AbstractRelicVoider){
+            if (sfItem instanceof AbstractRelicVoider) {
                 event.setCancelled(true);
+
                 ((AbstractRelicVoider) sfItem).onInventoryClick(event, itemStack);
             }
         });
     }
 
     @EventHandler
-    public void onItemPickup(EntityPickupItemEvent event){
-        if(event.isCancelled()){
+    public void onItemPickup(EntityPickupItemEvent event) {
+        if (event.isCancelled()) {
             return;
         }
 
-        if(!(event.getEntity() instanceof Player)){
+        if ((event.getEntity() instanceof Player)) {
             return;
         }
 
@@ -73,53 +75,58 @@ public class RelicVoiderListener implements Listener {
         Optional<SlimefunItem> pickedUpSfItem = Optional.ofNullable(SlimefunItem.getByItem(pickedUpItemStack));
 
         pickedUpSfItem.ifPresent((pickedUpRelic) -> {
-            if(pickedUpRelic instanceof AbstractRelic){
-                Player player = (Player) event.getEntity();
-                Inventory inv = player.getInventory();
+            if (! (pickedUpRelic instanceof AbstractRelic)) {
+                return;
+            }
 
-                AbstractRelic relic = (AbstractRelic) pickedUpRelic;
+            Player player = (Player) event.getEntity();
+            Inventory inv = player.getInventory();
 
-                for (int i = 0; i < inv.getSize(); i++) {
-                    if(inv.getItem(i) != null && inv.getItem(i).getType() != Material.AIR){
-                        ItemStack voiderItemStack = inv.getItem(i);
-                        Optional<SlimefunItem> voiderSfItemstack = Optional.ofNullable(SlimefunItem.getByItem(voiderItemStack));
+            AbstractRelic relic = (AbstractRelic) pickedUpRelic;
 
-                        if(voiderSfItemstack.isPresent()){
-                            if(voiderSfItemstack.get() instanceof AbstractRelicVoider){
-                                AbstractRelicVoider relicVoider = (AbstractRelicVoider) voiderSfItemstack.get();
-
-                                if(relic.getRarity() == relicVoider.getRarity()){
-                                    int pickedUpRelicCondition = relic.getRelicCondition(pickedUpItemStack);
-
-                                    relicVoider.onRelicPickup(event, voiderItemStack, pickedUpItem, pickedUpRelicCondition);
-                                    break;
-                                }
-                            }
-                        }
-                    }
+            for (int i = 0; i < inv.getSize(); i++) {
+                if (inv.getItem(i) == null || inv.getItem(i).getType() == Material.AIR) {
+                    continue;
                 }
 
-            } // end of if(pickedUpRelic instanceof AbstractRelic)
-        }); // end of Optional<SlimefunItem>
+                ItemStack voiderItemStack = inv.getItem(i);
+                Optional<SlimefunItem> voiderSfItemstack = Optional.ofNullable(SlimefunItem.getByItem(voiderItemStack));
+
+                if (! voiderSfItemstack.isPresent() || ! (voiderSfItemstack.get() instanceof AbstractRelicVoider)) {
+                    continue;
+                }
+
+                AbstractRelicVoider relicVoider = (AbstractRelicVoider) voiderSfItemstack.get();
+
+                if (relic.getRarity() == relicVoider.getRarity()) {
+                    int pickedUpRelicCondition = relic.getRelicCondition(pickedUpItemStack);
+
+                    relicVoider.onRelicPickup(event, voiderItemStack, pickedUpItem, pickedUpRelicCondition);
+
+                    break;
+                }
+            }
+        });
 
     }
 
     @EventHandler
-    public void onClick(PlayerInteractEvent event){
+    public void onClick(PlayerInteractEvent event) {
         Predicate<Action> isRightClick = action -> action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR;
 
-        if(isRightClick.test(event.getAction())){
+        if (isRightClick.test(event.getAction())) {
             ItemStack itemStack = event.getPlayer().getInventory().getItemInMainHand();
 
-            if(itemStack.getType() == Material.AIR){
+            if (itemStack.getType() == Material.AIR) {
                 return;
             }
 
             Optional<SlimefunItem> slimefunItem = Optional.ofNullable(SlimefunItem.getByItem(itemStack));
 
             slimefunItem.ifPresent(sfItem -> {
-                if(sfItem instanceof AbstractRelicVoider){
+                if (sfItem instanceof AbstractRelicVoider) {
                     ((AbstractRelicVoider) sfItem).onClick(itemStack, event.getPlayer());
+                    
                     event.setCancelled(true);
                 }
             });

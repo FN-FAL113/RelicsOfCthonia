@@ -17,7 +17,7 @@ public class BlazeAshes extends AbstractRelic {
 
     @ParametersAreNonnullByDefault
     public BlazeAshes(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe,
-                    double dropChance, int piglinRewardAmount, int defaultDropSize) {
+        double dropChance, int piglinRewardAmount, int defaultDropSize) {
         super(itemGroup, item, recipeType, recipe, dropChance, piglinRewardAmount, defaultDropSize);
     }
 
@@ -41,6 +41,7 @@ public class BlazeAshes extends AbstractRelic {
         }
 
         consumeRelic(itemInOffhand);
+        
         Utils.sendRelicMessage("&eWoah, what was that effect. I'll just trade this relic instead next time.", player);
     }
 

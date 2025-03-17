@@ -31,13 +31,14 @@ public class CthonianPearl extends AbstractRelic {
     public void onItemRightClick(PlayerInteractEvent event, Player player, ItemStack itemInOffhand) {
         Block block = player.getTargetBlockExact(70);
 
-        if(block == null || block.getType() == Material.AIR){
+        if (block == null || block.getType() == Material.AIR) {
             return;
         }
 
         consumeRelic(itemInOffhand);
 
         player.teleport(block.getLocation());
+        
         Utils.sendRelicMessage("&eYou have been teleported to your target location using Cthonian Pearl", player);
     }
 

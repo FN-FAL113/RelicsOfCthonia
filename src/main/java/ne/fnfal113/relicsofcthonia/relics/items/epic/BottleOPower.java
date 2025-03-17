@@ -3,6 +3,7 @@ package ne.fnfal113.relicsofcthonia.relics.items.epic;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedPotionEffectType;
 import ne.fnfal113.relicsofcthonia.relics.abstracts.AbstractRelic;
 import ne.fnfal113.relicsofcthonia.relics.implementation.Rarity;
 import ne.fnfal113.relicsofcthonia.utils.Utils;
@@ -18,7 +19,7 @@ public class BottleOPower extends AbstractRelic {
 
     @ParametersAreNonnullByDefault
     public BottleOPower(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe,
-                      double dropChance, int piglinRewardAmount, int defaultDropSize) {
+        double dropChance, int piglinRewardAmount, int defaultDropSize) {
         super(itemGroup, item, recipeType, recipe, dropChance, piglinRewardAmount, defaultDropSize);
     }
 
@@ -31,8 +32,8 @@ public class BottleOPower extends AbstractRelic {
     public void onItemRightClick(PlayerInteractEvent event, Player player, ItemStack itemInOffhand) {
         consumeRelic(itemInOffhand);
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 400, 1));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 400, 1));
+        player.addPotionEffect(new PotionEffect(VersionedPotionEffectType.RESISTANCE, 400, 1));
+        player.addPotionEffect(new PotionEffect(VersionedPotionEffectType.STRENGTH, 400, 1));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 400, 0));
 
         Utils.sendRelicMessage("&eBottle o Power has granted you special effects! Time to rekt pvp'iers!", player);

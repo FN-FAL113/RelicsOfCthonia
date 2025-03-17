@@ -31,13 +31,14 @@ public class ThunderInABottle extends AbstractRelic {
     public void onItemRightClick(PlayerInteractEvent event, Player player, ItemStack itemInOffhand) {
         Block block = player.getTargetBlockExact(70);
 
-        if(block == null || block.getType() == Material.AIR){
+        if (block == null || block.getType() == Material.AIR) {
             return;
         }
 
         consumeRelic(itemInOffhand);
 
         player.getWorld().strikeLightning(block.getLocation());
+        
         Utils.sendRelicMessage("&eYou have summoned a lightning on the target location!", player);
     }
 }

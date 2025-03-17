@@ -18,7 +18,7 @@ public class GrayBerry extends AbstractRelic {
 
     @ParametersAreNonnullByDefault
     public GrayBerry(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe,
-                    double dropChance, int piglinRewardAmount, int defaultDropSize) {
+        double dropChance, int piglinRewardAmount, int defaultDropSize) {
         super(itemGroup, item, recipeType, recipe, dropChance, piglinRewardAmount, defaultDropSize);
     }
 
@@ -29,8 +29,9 @@ public class GrayBerry extends AbstractRelic {
 
     @Override
     public void onItemRightClick(PlayerInteractEvent event, Player player, ItemStack itemInOffhand) {
-        if(!player.hasPotionEffect(PotionEffectType.BLINDNESS)){
+        if (! player.hasPotionEffect(PotionEffectType.BLINDNESS)) {
             consumeRelic(itemInOffhand);
+            
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1));
 
             Utils.sendRelicMessage("&eOh this berry is something I would not eat again! I rather trade this to piglins.", player);

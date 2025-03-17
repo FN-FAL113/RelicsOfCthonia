@@ -3,9 +3,6 @@ package ne.fnfal113.relicsofcthonia.config;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.SneakyThrows;
 import ne.fnfal113.relicsofcthonia.RelicsOfCthonia;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -22,11 +19,13 @@ import java.util.Map;
  * Main config manager for Relic of Cthonia
  * @author FN_FAL113
  */
-@NoArgsConstructor
 public class ConfigManager {
 
-    @Getter
     private final Map<String, FileConfiguration> fileConfigurationMap = new HashMap<>();
+
+    public Map<String, FileConfiguration> getFileConfigurationMap() {
+        return fileConfigurationMap;
+    }
 
     /**
      *
@@ -41,7 +40,7 @@ public class ConfigManager {
 
         try{
             // skip creating existing config sections and settings if necessary to prevent being overridden
-            if (!customConfig.isConfigurationSection(itemNameSection)) {
+            if (! customConfig.isConfigurationSection(itemNameSection)) {
                 // create a config section if not exist
                 customConfig.createSection(itemNameSection).set(settings, val);
                 // save only for new section or setting
@@ -61,7 +60,6 @@ public class ConfigManager {
      *
      * @param jsonName the name of the json file that will be saved
      */
-    @SneakyThrows
     public JsonObject loadJson(String jsonName) {
         try {
             // get the json in the resource folder as input stream
@@ -82,7 +80,7 @@ public class ConfigManager {
      */
     public FileConfiguration getCustomConfig(String fileName) {
         // if a custom config exist in the map with the given fileName key then re-use it
-        if(getFileConfigurationMap().containsKey(fileName)){
+        if (getFileConfigurationMap().containsKey(fileName)) {
             return getFileConfigurationMap().get(fileName);
         }
 
@@ -90,8 +88,9 @@ public class ConfigManager {
         FileConfiguration customConfig = new YamlConfiguration();
 
         try {
-            if (!customConfigFile.exists()) {
+            if (! customConfigFile.exists()) {
                 customConfigFile.getParentFile().mkdirs();
+                
                 RelicsOfCthonia.getInstance().saveResource(fileName + ".yml", false);
             }
 

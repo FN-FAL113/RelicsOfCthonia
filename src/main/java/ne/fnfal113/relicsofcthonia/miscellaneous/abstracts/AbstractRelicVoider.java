@@ -6,7 +6,6 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
-import lombok.Getter;
 import ne.fnfal113.relicsofcthonia.RelicsOfCthonia;
 import ne.fnfal113.relicsofcthonia.relics.implementation.Rarity;
 import ne.fnfal113.relicsofcthonia.utils.Utils;
@@ -25,22 +24,20 @@ import org.bukkit.persistence.PersistentDataType;
 
 public class AbstractRelicVoider extends UnplaceableBlock {
 
-    private static final CustomItemStack DECREMENT_CONDITION = new CustomItemStack(Material.RED_STAINED_GLASS_PANE,
+    private static final ItemStack DECREMENT_CONDITION = CustomItemStack.create(Material.RED_STAINED_GLASS_PANE,
             "&cDecrement Condition Quota",
             "&7Click to decrement the quota by 1"
     );
 
-    private static final CustomItemStack INCREMENT_CONDITION = new CustomItemStack(Material.GREEN_STAINED_GLASS_PANE,
+    private static final ItemStack INCREMENT_CONDITION = CustomItemStack.create(Material.GREEN_STAINED_GLASS_PANE,
             "&cIncrement Condition Quota",
             "&7Click to increment the quota by 1"
     );
 
-    @Getter
     private final boolean notifEnabled = RelicsOfCthonia.getInstance().getConfig().getBoolean("enable-relic-voider-notif", true);
 
-    @Getter
     private final Rarity rarity;
-    @Getter
+
     final NamespacedKey conditionKey;
 
     public AbstractRelicVoider(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, Rarity rarity) {
@@ -64,38 +61,40 @@ public class AbstractRelicVoider extends UnplaceableBlock {
     public void setConditionQuota(ItemStack itemStack, Inventory inventory, int integer){
         ItemMeta meta = itemStack.getItemMeta();
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
+        
         int conditionQuota = pdc.getOrDefault(getConditionKey(), PersistentDataType.INTEGER, 0);
         int finalCondition = conditionQuota + integer;
 
-        if(finalCondition < 0 || finalCondition > 100){
+        if (finalCondition < 0 || finalCondition > 100) {
             return;
         }
 
         pdc.set(getConditionKey(), PersistentDataType.INTEGER, finalCondition);
         itemStack.setItemMeta(meta);
 
-        inventory.setItem(4, new CustomItemStack(Material.PURPLE_STAINED_GLASS,
-                "&fVoids any " + getRarity().name() + " relic whose",
-                "&fcondition is below " + "&6&l" + finalCondition + "%"
+        inventory.setItem(4, CustomItemStack.create(Material.PURPLE_STAINED_GLASS,
+            "&fVoids any " + getRarity().name() + " relic whose",
+            "&fcondition is below " + "&6&l" + finalCondition + "%"
         ));
     }
 
-    public void onClick(ItemStack itemStack, Player player){
+    public void onClick(ItemStack itemStack, Player player) {
         ItemMeta meta = itemStack.getItemMeta();
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
+        
         int conditionQuota = pdc.getOrDefault(getConditionKey(), PersistentDataType.INTEGER, 0);
 
         Inventory inventory = Bukkit.createInventory(null, 9, Utils.colorTranslator(meta.getDisplayName()));
 
-        for(int i = 0; i < inventory.getSize(); i++){
-            if(i == 0){
+        for (int i = 0; i < inventory.getSize(); i++) {
+            if(i == 0) {
                 inventory.setItem(i, DECREMENT_CONDITION);
-            } else if(i == 8){
+            } else if(i == 8) {
                 inventory.setItem(i, INCREMENT_CONDITION);
             } else if(i == 4) {
-                inventory.setItem(i, new CustomItemStack(Material.PURPLE_STAINED_GLASS,
-                        "&fVoids any " + getRarity().name() + " relic whose",
-                        "&fcondition is below " + "&6&l" + conditionQuota + "%"
+                inventory.setItem(i, CustomItemStack.create(Material.PURPLE_STAINED_GLASS,
+                    "&fVoids any " + getRarity().name() + " relic whose",
+                    "&fcondition is below " + "&6&l" + conditionQuota + "%"
                 ));
             } else {
                 inventory.setItem(i, ChestMenuUtils.getBackground());
@@ -105,13 +104,14 @@ public class AbstractRelicVoider extends UnplaceableBlock {
         player.openInventory(inventory);
     }
 
-    public void onRelicPickup(EntityPickupItemEvent event, ItemStack voider, Item pickedUpRelic, int pickedUpRelicCondition){
+    public void onRelicPickup(EntityPickupItemEvent event, ItemStack voider, Item pickedUpRelic, int pickedUpRelicCondition) {
         ItemMeta meta = voider.getItemMeta();
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
+        
         int conditionQuota = pdc.getOrDefault(getConditionKey(), PersistentDataType.INTEGER, 0);
 
-        if(pickedUpRelicCondition <= conditionQuota){
-            if(isNotifEnabled()) {
+        if (pickedUpRelicCondition <= conditionQuota) {
+            if (isNotifEnabled()) {
                 Utils.sendRelicMessage("&6Successfully voided " + "&r" + pickedUpRelic.getItemStack().getItemMeta().getDisplayName(), event.getEntity());
             }
 
@@ -121,4 +121,15 @@ public class AbstractRelicVoider extends UnplaceableBlock {
         }
     }
 
+    public boolean isNotifEnabled() {
+        return notifEnabled;
+    }
+
+    public Rarity getRarity() {
+        return rarity;
+    }
+
+    public NamespacedKey getConditionKey() {
+        return conditionKey;
+    }
 }

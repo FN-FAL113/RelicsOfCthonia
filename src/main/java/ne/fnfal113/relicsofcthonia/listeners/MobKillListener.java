@@ -1,6 +1,5 @@
 package ne.fnfal113.relicsofcthonia.listeners;
 
-import lombok.Getter;
 import ne.fnfal113.relicsofcthonia.RelicsOfCthonia;
 import ne.fnfal113.relicsofcthonia.relics.abstracts.AbstractRelic;
 import ne.fnfal113.relicsofcthonia.utils.Utils;
@@ -22,20 +21,25 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MobKillListener implements Listener {
 
-    @Getter
     private final Map<AbstractRelic, List<String>> whereToDropMobMap = RelicsOfCthonia.getInstance().getRelicsRegistry().getWhereToDropMobMap();
 
+    public Map<AbstractRelic, List<String>> getWhereToDropMobMap() {
+        return whereToDropMobMap;
+    }
+
     @EventHandler
-    public void onMobSpawn(CreatureSpawnEvent event){
-        if(event.isCancelled()) {
+    public void onMobSpawn(CreatureSpawnEvent event) {
+        // This event handler is for tagging mobs from spawners, this is to prevent relic farming.
+
+        if (event.isCancelled()) {
             return;
         }
 
-        if(event.getSpawnReason() != CreatureSpawnEvent.SpawnReason.SPAWNER) {
+        if (event.getSpawnReason() != CreatureSpawnEvent.SpawnReason.SPAWNER) {
             return;
         }
 
-        if(event.getEntity().getWorld().getEnvironment() != World.Environment.NETHER) {
+        if (event.getEntity().getWorld().getEnvironment() != World.Environment.NETHER) {
             return;
         }
 
@@ -48,15 +52,15 @@ public class MobKillListener implements Listener {
     public void onMobKill(EntityDeathEvent event) {
         LivingEntity livingEntity = event.getEntity();
 
-        if(livingEntity.getKiller() == null){
+        if (livingEntity.getKiller() == null) {
             return;
         }
 
-        if(livingEntity.getWorld().getEnvironment() != World.Environment.NETHER){
+        if (livingEntity.getWorld().getEnvironment() != World.Environment.NETHER) {
             return;
         }
 
-        if(livingEntity.hasMetadata("relic_spawned_mob")) {
+        if (livingEntity.hasMetadata("relic_spawned_mob")) {
             livingEntity.removeMetadata("relic_spawned_mob", RelicsOfCthonia.getInstance());
 
             return;
@@ -70,23 +74,23 @@ public class MobKillListener implements Listener {
         Utils.createAsyncTask(asyncTask -> {
             Iterator<Map.Entry<AbstractRelic, List<String>>> dropIterator = getWhereToDropMobMap().entrySet().iterator();
             
-            while (dropIterator.hasNext()){
+            while (dropIterator.hasNext()) {
                 Map.Entry<AbstractRelic, List<String>> pair = dropIterator.next();
                 AbstractRelic abstractRelic = pair.getKey();
 
-                if(abstractRelic.isDisabledIn(world) || abstractRelic.isDisabled()){
+                if (abstractRelic.isDisabledIn(world) || abstractRelic.isDisabled()) {
                     asyncTask.cancel();
 
                     continue;
                 }
 
                 // check if relic mob list contains killed mob type
-                if(pair.getValue().contains(entityType)) {
+                if (pair.getValue().contains(entityType)) {
                     // biased probability to lower the chance of repeated values from the current random thread which utilizes same seed
                     double randomOrigin = currentRandomThread.nextDouble(0.0, 60);
                     double randomNum = ThreadLocalRandom.current().nextDouble(randomOrigin, 100);
 
-                    if(randomNum < abstractRelic.getDropChance()) {
+                    if (randomNum < abstractRelic.getDropChance()) {
                         ItemStack drop = abstractRelic.setRelicConditionAndGet(true, 0);
                         
                         Utils.createSyncTask(syncTask -> livingEntity.getWorld().dropItemNaturally(livingEntity.getLocation(), drop));
@@ -95,16 +99,14 @@ public class MobKillListener implements Listener {
                     }
 
                     // limit to max 2 drops per block only
-                    if(itemDroppedCounter.get() == 2){
+                    if (itemDroppedCounter.get() == 2) {
                         asyncTask.cancel();
 
                         return;
                     }
-
-                    
                 }
 
-                if(!dropIterator.hasNext()) {
+                if (! dropIterator.hasNext()) {
                     asyncTask.cancel();    
                 }
             }

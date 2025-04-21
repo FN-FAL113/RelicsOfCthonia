@@ -42,7 +42,8 @@ public abstract class AbstractRelic extends SlimefunItem implements OffHandRight
 
     @ParametersAreNonnullByDefault
     public AbstractRelic(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe,
-                         double dropChance, int piglinRewardAmount, int defaultDropSize) {
+        double dropChance, int piglinRewardAmount, int defaultDropSize) 
+    {
         super(itemGroup, item, recipeType, recipe);
 
         initializeSettings(dropChance, piglinRewardAmount, defaultDropSize);
@@ -55,14 +56,52 @@ public abstract class AbstractRelic extends SlimefunItem implements OffHandRight
     }
 
     public void updateRelicLore() {
-       // update this itemstack object lore for the drop chance
-       Utils.setLoreByConfigValue(this.getItem(), this.getId(), "drop-chance", "%", "&e", "%", "relic-settings");
-       // update this itemstack object lore on which materials do relic drop
-       Utils.setLoreByConfigStringList(this.getItem(), this.getId(), "drops-on-material", "Drops on:", "&e", "‣ ", "", "relic-settings");
-       // update this itemstack object lore on which mobs do relic drop
-       Utils.setLoreByConfigStringList(this.getItem(), this.getId(), "drops-on-mob", "Drops on:", "&e", "‣ ", "", "relic-settings");
-       // update this itemstack object lore for the barter rewards
-       Utils.setLoreByConfigStringList(this.getItem(), this.getId(), "piglin-barter-rewards", "Possible Piglin reward:", "&a", "‣ " + getPiglinRewardAmount() + " ", "", "relic-settings");
+        // update this itemstack object lore for the drop chance
+        Utils.setLoreByConfigValue(
+            (ItemStack) Utils.getField(SlimefunItem.class, "itemStackTemplate", this), 
+            this.getId(),
+            "drop-chance",
+            "%",
+            "&e",
+            "%", 
+            "relic-settings"
+        );
+
+        // update this itemstack object lore on which materials do relic drop
+        Utils.setLoreByConfigStringList(
+            (ItemStack) Utils.getField(SlimefunItem.class, "itemStackTemplate", this),
+            this.getId(),
+            "drops-on-material",
+            "Drops on:",
+            "&e",
+            "‣ ", 
+            "", 
+            "relic-settings"
+        );
+
+        // update this itemstack object lore on which mobs do relic drop
+        Utils.setLoreByConfigStringList(
+            (ItemStack) Utils.getField(SlimefunItem.class, "itemStackTemplate", this),
+            this.getId(),
+            "drops-on-mob",
+            "Drops on:",
+            "&e",
+            "‣ ",
+            "",
+            "relic-settings"
+        );
+       
+        // update this itemstack object lore for the barter rewards
+        Utils.setLoreByConfigStringList(
+            (ItemStack) Utils.getField(SlimefunItem.class, "itemStackTemplate", this), 
+            this.getId(), 
+            "piglin-barter-rewards", 
+            "Possible Piglin reward:", 
+            "&a", 
+            "‣ " + getPiglinRewardAmount() + " ", 
+            "", 
+            "relic-settings"
+        );
     }
 
     public void initializeSettings(double dropChance, int piglinRewardAmount, int defaultDropSize) {

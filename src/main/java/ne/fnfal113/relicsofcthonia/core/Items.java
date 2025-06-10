@@ -94,6 +94,7 @@ public class Items {
         new MagmaGauntlet(Groups.LEGENDARY_RELIC, ItemStacks.LEGENDARY_RELIC_MAGMA_GAUNTLET, 1.42, 2, 2).register(instance);
         new GlazingPearl(Groups.LEGENDARY_RELIC, ItemStacks.LEGENDARY_RELIC_GLAZING_PEARL, 1.35, 2, 2).register(instance);
         new SapphireRing(Groups.LEGENDARY_RELIC, ItemStacks.LEGENDARY_RELIC_SAPPHIRE_RING, 1.02, 2, 2).register(instance);
+
         // Relic Voiders
         new RelicVoider(Groups.RELIC_VOIDER, ItemStacks.COMMON_RELIC_VOIDER, RecipeType.MAGIC_WORKBENCH, new ItemStack[]{
                 new ItemStack(Material.NETHERRACK), null, new ItemStack(Material.NETHERRACK),

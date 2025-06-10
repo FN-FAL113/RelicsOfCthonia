@@ -12,7 +12,7 @@ import static ne.fnfal113.relicsofcthonia.RelicsOfCthonia.CONFIG_MANAGER;
 public class Utils {
 
     public static void sendRelicMessage(String message, LivingEntity entity) {
-        entity.sendMessage(ChatColors.color("&6[RelicsOfCthonia] > " + message));
+        entity.sendMessage(ChatColors.color("&6[Relics] > " + message));
     }
 
     public static void replaceLoreValue(ItemStack itemStack, String replace, String color, String prefix, String suffix, Object value) {

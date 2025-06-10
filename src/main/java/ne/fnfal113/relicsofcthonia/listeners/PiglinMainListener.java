@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.event.entity.PiglinBarterEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -55,14 +56,6 @@ public class PiglinMainListener implements Listener {
         Material type = mainHandItem.getType();
         piglin.addBarterMaterial(type);
         setCurrentlyTradingPlayer(piglin, player);
-    }
-
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onDrop(EntityDropItemEvent event){
-        ItemStack droppingItem = DROPPING_ITEM.remove(event.getEntity().getUniqueId());
-        if (droppingItem != null && SlimefunItem.getByItem(event.getItemDrop().getItemStack()) instanceof PiglinBarterDrop) {
-            event.getItemDrop().setItemStack(droppingItem);
-        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -108,6 +101,23 @@ public class PiglinMainListener implements Listener {
 
         piglin.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, piglin.getLocation().add(0, 2.2, 0), 0);
         piglin.getWorld().playSound(piglin.getLocation(), Sound.ENTITY_PIGLIN_ADMIRING_ITEM, 1.0F, 1.0F);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onDamage(EntityDamageByEntityEvent event) {
+        // When piglins are damaged by an entity, they stop the active trade (vanilla behavior)
+        if (event.getEntity() instanceof Piglin piglin) {
+            clearCurrentlyTradingPlayer(piglin);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onDrop(EntityDropItemEvent event){
+        // Prevent slimefun from overriding relic sourced barter drops
+        ItemStack droppingItem = DROPPING_ITEM.remove(event.getEntity().getUniqueId());
+        if (droppingItem != null && SlimefunItem.getByItem(event.getItemDrop().getItemStack()) instanceof PiglinBarterDrop) {
+            event.getItemDrop().setItemStack(droppingItem);
+        }
     }
 
     private void setCurrentlyTradingPlayer(Piglin piglin, Player player) {

@@ -42,7 +42,7 @@ public class RelicVoider extends UnplaceableBlock {
 
         if (AbstractRelic.getRelicCondition(relicItem.getItemStack()) <= getConditionQuota(voider)) {
             if (notifEnabled) {
-                Utils.sendRelicMessage("&6Successfully voided " + "&r" + relic.getItemName(), event.getEntity());
+                Utils.sendRelicMessage("&6Voided " + "&r" + relic.getItemName(), event.getEntity());
             }
             relicItem.remove();
             event.setCancelled(true);

@@ -4,7 +4,6 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import ne.fnfal113.relicsofcthonia.slimefun.RelicVoider;
 import ne.fnfal113.relicsofcthonia.slimefun.relics.AbstractRelic;
 import ne.fnfal113.relicsofcthonia.utils.Utils;
-import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

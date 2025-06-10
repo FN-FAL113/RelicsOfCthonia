@@ -1,9 +1,7 @@
 package ne.fnfal113.relicsofcthonia.listeners;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import ne.fnfal113.relicsofcthonia.relics.abstracts.AbstractRelic;
-import ne.fnfal113.relicsofcthonia.relics.implementation.OffHandRightClickHandler;
-import org.bukkit.Material;
+import ne.fnfal113.relicsofcthonia.api.OffHandRightClickHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,29 +14,17 @@ public class OffHandClickListener implements Listener {
 
     @EventHandler
     public void onOffHandRightClick(PlayerInteractEvent event){
-        if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK){
-            return;
-        }
-
-        if(event.getHand() == EquipmentSlot.HAND){
+        if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK
+                || event.getHand() == EquipmentSlot.HAND) {
             return;
         }
 
         Player player = event.getPlayer();
         ItemStack itemStack = player.getInventory().getItemInOffHand();
-
-        if(itemStack.getType() == Material.AIR){
-            return;
+        SlimefunItem item = SlimefunItem.getByItem(itemStack);
+        if (item != null) {
+            item.callItemHandler(OffHandRightClickHandler.class, handler -> handler.onItemRightClick(event, player, itemStack));
         }
-
-        SlimefunItem slimefunItem = SlimefunItem.getByItem(itemStack);
-
-        if(slimefunItem instanceof AbstractRelic){
-            AbstractRelic relic = (AbstractRelic) slimefunItem;
-
-            relic.callRelicHandler(OffHandRightClickHandler.class, relicHandler -> relicHandler.onItemRightClick(event, player, itemStack), relic);
-        }
-
     }
 
 }

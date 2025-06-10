@@ -1,129 +1,74 @@
 package ne.fnfal113.relicsofcthonia.listeners;
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import ne.fnfal113.relicsofcthonia.miscellaneous.abstracts.AbstractRelicVoider;
-import ne.fnfal113.relicsofcthonia.relics.abstracts.AbstractRelic;
+import ne.fnfal113.relicsofcthonia.slimefun.RelicVoider;
+import ne.fnfal113.relicsofcthonia.slimefun.relics.AbstractRelic;
 import ne.fnfal113.relicsofcthonia.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityPickupItemEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.Optional;
-import java.util.function.Predicate;
 
 public class RelicVoiderListener implements Listener {
 
-    @EventHandler
-    public void onChestMenuClick(InventoryClickEvent event){
-        if(event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR){
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onScrollHotbar(PlayerItemHeldEvent event) {
+        Player player = event.getPlayer();
+        if (!player.isSneaking()) {
             return;
         }
 
-        InventoryView inventoryView = event.getView();
-        Player player = (Player) event.getWhoClicked();
-
-        if(player.getInventory().getItemInMainHand().getType() == Material.AIR){
+        Inventory inv = player.getInventory();
+        ItemStack previous = inv.getItem(event.getPreviousSlot());
+        if (!(SlimefunItem.getByItem(previous) instanceof RelicVoider)) {
             return;
         }
 
-        ItemStack itemStack = player.getInventory().getItemInMainHand();
-        ItemMeta meta = itemStack.getItemMeta();
+        event.setCancelled(true);
+        int direction = event.getNewSlot() - event.getPreviousSlot();
+        if (Math.abs(direction) >= 8) {
+            direction = direction > 0 ? -1 : 1;
+        } else {
+            direction = direction > 0 ? 1 : -1;
+        }
 
-        if(!meta.hasDisplayName()){
+        int oldQuota = RelicVoider.getConditionQuota(previous);
+        int quota = Math.clamp(oldQuota + direction, 1, 100);
+        if (oldQuota == quota) {
             return;
         }
 
-        if(!inventoryView.getTitle().equals(Utils.colorTranslator(meta.getDisplayName()))){
-            return;
-        }
-
-        Optional<SlimefunItem> slimefunItem = Optional.ofNullable(SlimefunItem.getByItem(itemStack));
-
-        slimefunItem.ifPresent(sfItem -> {
-            if(sfItem instanceof AbstractRelicVoider){
-                event.setCancelled(true);
-                ((AbstractRelicVoider) sfItem).onInventoryClick(event, itemStack);
-            }
-        });
+        RelicVoider.setConditionQuota(previous, quota);
+        Utils.replaceLoreValue(previous, "Condition Quota", "&d", "Condition Quota: ", "%", quota, true);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onItemPickup(EntityPickupItemEvent event){
-        if(event.isCancelled()){
-            return;
-        }
-
-        if(!(event.getEntity() instanceof Player)){
+        if (!(event.getEntity() instanceof Player player)) {
             return;
         }
 
         Item pickedUpItem = event.getItem();
         ItemStack pickedUpItemStack = pickedUpItem.getItemStack();
+        SlimefunItem pickedUpSfItem = SlimefunItem.getByItem(pickedUpItemStack);
+        if (!(pickedUpSfItem instanceof AbstractRelic relic)) {
+            return;
+        }
 
-        Optional<SlimefunItem> pickedUpSfItem = Optional.ofNullable(SlimefunItem.getByItem(pickedUpItemStack));
+        Inventory inv = player.getInventory();
 
-        pickedUpSfItem.ifPresent((pickedUpRelic) -> {
-            if(pickedUpRelic instanceof AbstractRelic){
-                Player player = (Player) event.getEntity();
-                Inventory inv = player.getInventory();
-
-                AbstractRelic relic = (AbstractRelic) pickedUpRelic;
-
-                for (int i = 0; i < inv.getSize(); i++) {
-                    if(inv.getItem(i) != null && inv.getItem(i).getType() != Material.AIR){
-                        ItemStack voiderItemStack = inv.getItem(i);
-                        Optional<SlimefunItem> voiderSfItemstack = Optional.ofNullable(SlimefunItem.getByItem(voiderItemStack));
-
-                        if(voiderSfItemstack.isPresent()){
-                            if(voiderSfItemstack.get() instanceof AbstractRelicVoider){
-                                AbstractRelicVoider relicVoider = (AbstractRelicVoider) voiderSfItemstack.get();
-
-                                if(relic.getRarity() == relicVoider.getRarity()){
-                                    int pickedUpRelicCondition = relic.getRelicCondition(pickedUpItemStack);
-
-                                    relicVoider.onRelicPickup(event, voiderItemStack, pickedUpItem, pickedUpRelicCondition);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-
-            } // end of if(pickedUpRelic instanceof AbstractRelic)
-        }); // end of Optional<SlimefunItem>
-
-    }
-
-    @EventHandler
-    public void onClick(PlayerInteractEvent event){
-        Predicate<Action> isRightClick = action -> action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR;
-
-        if(isRightClick.test(event.getAction())){
-            ItemStack itemStack = event.getPlayer().getInventory().getItemInMainHand();
-
-            if(itemStack.getType() == Material.AIR){
-                return;
+        for (int i = 0; i < inv.getSize(); i++) {
+            ItemStack itemStack = inv.getItem(i);
+            if (SlimefunItem.getByItem(itemStack) instanceof RelicVoider voider) {
+                voider.onRelicPickup(event, itemStack, relic, pickedUpItem);
+                break;
             }
-
-            Optional<SlimefunItem> slimefunItem = Optional.ofNullable(SlimefunItem.getByItem(itemStack));
-
-            slimefunItem.ifPresent(sfItem -> {
-                if(sfItem instanceof AbstractRelicVoider){
-                    ((AbstractRelicVoider) sfItem).onClick(itemStack, event.getPlayer());
-                    event.setCancelled(true);
-                }
-            });
         }
     }
-
 }

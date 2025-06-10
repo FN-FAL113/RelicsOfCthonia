@@ -14,6 +14,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -42,6 +43,7 @@ public class MobListener implements Listener {
             return;
         }
 
+        Collections.shuffle(relics);
         for (AbstractRelic relic : relics) {
             if (relic.isDisabledIn(world) || relic.isDisabled()) {
                 continue;

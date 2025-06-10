@@ -14,6 +14,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -41,6 +42,7 @@ public class MiningListener implements Listener {
             return;
         }
 
+        Collections.shuffle(relics);
         for (AbstractRelic relic : relics) {
             if (relic.isDisabledIn(event.getPlayer().getWorld()) || relic.isDisabled()) {
                 continue;

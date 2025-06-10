@@ -7,6 +7,7 @@ import ne.fnfal113.relicsofcthonia.RelicsRegistry;
 import ne.fnfal113.relicsofcthonia.slimefun.relics.AbstractRelic;
 import ne.fnfal113.relicsofcthonia.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -136,6 +137,6 @@ public class PiglinMainListener implements Listener {
     }
 
     private boolean isCurrentlyTradingRelic(Piglin piglin) {
-        return getCurrentlyTradingPlayer(piglin) != null;
+        return getCurrentlyTradingPlayer(piglin) != null && SlimefunItem.getByItem(piglin.getEquipment().getItemInOffHand()) instanceof AbstractRelic;
     }
 }

@@ -35,9 +35,9 @@ public class RelicVoider extends UnplaceableBlock {
         return PersistentDataAPI.getInt(itemStack.getItemMeta(), Keys.RELIC_CONDITION_QUOTA, 1);
     }
 
-    public void onRelicPickup(EntityPickupItemEvent event, ItemStack voider, AbstractRelic relic, Item relicItem) {
+    public boolean onRelicPickup(EntityPickupItemEvent event, ItemStack voider, AbstractRelic relic, Item relicItem) {
         if (relic.getRarity().ordinal() > rarity.ordinal()) {
-            return;
+            return false;
         }
 
         if (AbstractRelic.getRelicCondition(relicItem.getItemStack()) <= getConditionQuota(voider)) {
@@ -46,7 +46,9 @@ public class RelicVoider extends UnplaceableBlock {
             }
             relicItem.remove();
             event.setCancelled(true);
+            return true;
         }
+        return false;
     }
 
 }

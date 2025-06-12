@@ -64,8 +64,8 @@ public class RelicVoiderListener implements Listener {
 
         for (int i = 0; i < inv.getSize(); i++) {
             ItemStack itemStack = inv.getItem(i);
-            if (SlimefunItem.getByItem(itemStack) instanceof RelicVoider voider) {
-                voider.onRelicPickup(event, itemStack, relic, pickedUpItem);
+            if (SlimefunItem.getByItem(itemStack) instanceof RelicVoider voider
+                    && voider.onRelicPickup(event, itemStack, relic, pickedUpItem)) {
                 break;
             }
         }

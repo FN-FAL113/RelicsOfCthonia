@@ -40,8 +40,8 @@ public final class RelicsOfCthonia extends JavaPlugin implements SlimefunAddon {
 
         registerEvents();
 
-        if (getConfig().getBoolean("auto-update", true) && getDescription().getVersion().startsWith("Dev - ")) {
-            new BlobBuildUpdater(this, getFile(), "RelicsOfCthonia").start();
+        if (getConfig().getBoolean("auto-update", true) && getDescription().getVersion().startsWith("Experimental - ")) {
+            new BlobBuildUpdater(this, getFile(), "RelicsOfCthonia", "Experimental").start();
         }
     }
 

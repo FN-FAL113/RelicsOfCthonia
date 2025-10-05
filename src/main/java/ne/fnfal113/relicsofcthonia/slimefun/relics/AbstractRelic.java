@@ -43,8 +43,6 @@ public abstract class AbstractRelic extends UnplaceableBlock {
     @Getter private final int piglinRewardAmount;
     @Getter private final int defaultDropSize;
 
-    private final SlimefunItemStack templateItem;
-
     @ParametersAreNonnullByDefault
     public AbstractRelic(ItemGroup itemGroup, SlimefunItemStack item, Rarity rarity, double dropChance, int piglinRewardAmount, int defaultDropSize) {
         super(itemGroup, item, RecipeTypes.DROP_TYPE, new ItemStack[9]);
@@ -55,16 +53,15 @@ public abstract class AbstractRelic extends UnplaceableBlock {
         this.dropChance = CONFIG_MANAGER.getCustomConfig("relic-settings").getDouble(this.getId() + "." + "drop-chance") / 100.0;
         this.piglinRewardAmount = CONFIG_MANAGER.getCustomConfig("relic-settings").getInt(this.getId() + "." + "piglin-reward-amount");
         this.defaultDropSize = defaultDropSize;
-        this.templateItem = (SlimefunItemStack) item.clone();
     }
 
     @Override
     public @NotNull ItemStack getItem() {
-        return templateItem;
+        return (ItemStack) Utils.getField(SlimefunItem.class, "itemStackTemplate", this);
     }
 
     public ItemStack randomRelic() {
-        ItemStack itemStack = templateItem.clone();
+        ItemStack itemStack = this.getItem().clone();
         int condition = ThreadLocalRandom.current().nextInt(1,100);
         itemStack.editMeta(meta -> PersistentDataAPI.setInt(meta, Keys.RELIC_CONDITION, condition));
         Utils.replaceLoreValue(itemStack, "%", "&d", "","%", condition);
@@ -76,9 +73,8 @@ public abstract class AbstractRelic extends UnplaceableBlock {
     }
 
     public void postInit() {
-        Utils.replaceLoreValue(templateItem, "%", "&e", "", "%", dropChance * 100);
+        Utils.replaceLoreValue(this.getItem(), "%", "&e", "", "%", dropChance * 100);
         registerRelic();
-        templateItem.lock();
     }
 
     private void registerRelic() {
@@ -161,8 +157,8 @@ public abstract class AbstractRelic extends UnplaceableBlock {
             e.printStackTrace();
         }
 
-        Utils.replaceLoreList(templateItem, "Drops on:", "&e", "‣ ", sourcesLore);
-        Utils.replaceLoreList(templateItem, "Possible Piglin reward:", "&a", "‣ " + piglinRewardAmount + "x ", rewardsLore);
+        Utils.replaceLoreList(this.getItem(), "Drops on:", "&e", "‣ ", sourcesLore);
+        Utils.replaceLoreList(this.getItem(), "Possible Piglin reward:", "&a", "‣ " + piglinRewardAmount + "x ", rewardsLore);
     }
 
     public void initSingleSectionSettings(double dropChance, int piglinRewardAmount) {

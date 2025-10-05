@@ -98,31 +98,31 @@ public class Items {
         // Relic Voiders
         new RelicVoider(Groups.RELIC_VOIDER, ItemStacks.COMMON_RELIC_VOIDER, RecipeType.MAGIC_WORKBENCH, new ItemStack[]{
                 new ItemStack(Material.NETHERRACK), null, new ItemStack(Material.NETHERRACK),
-                SlimefunItems.MAGIC_LUMP_1, SlimefunItems.MAGICAL_GLASS, SlimefunItems.MAGIC_LUMP_1,
+                SlimefunItems.MAGIC_LUMP_1.item(), SlimefunItems.MAGICAL_GLASS.item(), SlimefunItems.MAGIC_LUMP_1.item(),
                 new ItemStack(Material.NETHERRACK), null, new ItemStack(Material.NETHERRACK)
         }, Rarity.COMMON).register(instance);
 
         new RelicVoider(Groups.RELIC_VOIDER, ItemStacks.UNCOMMON_RELIC_VOIDER, RecipeType.MAGIC_WORKBENCH, new ItemStack[]{
                 new ItemStack(Material.NETHERRACK), new ItemStack(Material.ROTTEN_FLESH), new ItemStack(Material.NETHERRACK),
-                SlimefunItems.MAGIC_LUMP_1, ItemStacks.COMMON_RELIC_VOIDER, SlimefunItems.MAGIC_LUMP_1,
+                SlimefunItems.MAGIC_LUMP_1.item(), ItemStacks.COMMON_RELIC_VOIDER.item(), SlimefunItems.MAGIC_LUMP_1.item(),
                 new ItemStack(Material.NETHERRACK), new ItemStack(Material.ROTTEN_FLESH), new ItemStack(Material.NETHERRACK)
         }, Rarity.UNCOMMON).register(instance);
 
         new RelicVoider(Groups.RELIC_VOIDER, ItemStacks.RARE_RELIC_VOIDER, RecipeType.MAGIC_WORKBENCH, new ItemStack[]{
                 new ItemStack(Material.END_STONE), new ItemStack(Material.BONE), new ItemStack(Material.END_STONE),
-                SlimefunItems.MAGIC_LUMP_2, ItemStacks.UNCOMMON_RELIC_VOIDER, SlimefunItems.MAGIC_LUMP_2,
+                SlimefunItems.MAGIC_LUMP_2.item(), ItemStacks.UNCOMMON_RELIC_VOIDER.item(), SlimefunItems.MAGIC_LUMP_2.item(),
                 new ItemStack(Material.NETHERRACK), new ItemStack(Material.ROTTEN_FLESH), new ItemStack(Material.NETHERRACK)
         }, Rarity.RARE).register(instance);
 
         new RelicVoider(Groups.RELIC_VOIDER, ItemStacks.EPIC_RELIC_VOIDER, RecipeType.MAGIC_WORKBENCH, new ItemStack[]{
                 new ItemStack(Material.ROTTEN_FLESH), new ItemStack(Material.FERMENTED_SPIDER_EYE), new ItemStack(Material.ROTTEN_FLESH),
-                SlimefunItems.MAGIC_LUMP_2, ItemStacks.RARE_RELIC_VOIDER, SlimefunItems.MAGIC_LUMP_2,
+                SlimefunItems.MAGIC_LUMP_2.item(), ItemStacks.RARE_RELIC_VOIDER.item(), SlimefunItems.MAGIC_LUMP_2.item(),
                 new ItemStack(Material.NETHERRACK), new ItemStack(Material.BONE), new ItemStack(Material.NETHERRACK)
         }, Rarity.EPIC).register(instance);
 
         new RelicVoider(Groups.RELIC_VOIDER, ItemStacks.LEGENDARY_RELIC_VOIDER, RecipeType.MAGIC_WORKBENCH, new ItemStack[]{
                 new ItemStack(Material.BLAZE_POWDER), new ItemStack(Material.ROTTEN_FLESH), new ItemStack(Material.BLAZE_POWDER),
-                SlimefunItems.MAGIC_LUMP_3, ItemStacks.EPIC_RELIC_VOIDER, SlimefunItems.MAGIC_LUMP_3,
+                SlimefunItems.MAGIC_LUMP_3.item(), ItemStacks.EPIC_RELIC_VOIDER.item(), SlimefunItems.MAGIC_LUMP_3.item(),
                 new ItemStack(Material.SOUL_SAND), new ItemStack(Material.FERMENTED_SPIDER_EYE), new ItemStack(Material.NETHERRACK)
         }, Rarity.LEGENDARY).register(instance);
 
